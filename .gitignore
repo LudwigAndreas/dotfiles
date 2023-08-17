@@ -1,0 +1,117 @@
+# OS-generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# Logs and databases #
+######################
+*.log
+*.sqlite
+*.db
+
+# Temporary files #
+###################
+*.swp
+*~
+*.bak
+*.tmp
+
+# Vim files #
+#############
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-rt-v][a-z]
+[._]ss[a-gi-z]
+[._]sw[a-p]
+Session.vim
+Sessionx.vim
+.netrwhist
+*~
+tags
+[._]*.un~
+
+# IDE and editor files #
+#########################
+.vscode/
+.idea/
+*.sublime-*
+*.suo
+*.user
+*.sln.docstates
+*.sln.docstates.suo
+
+# Java #
+########
+*.class
+
+# Compiled Python #
+###################
+__pycache__/
+*.pyc
+
+# Build directories #
+#####################
+bin/
+build/
+out/
+target/
+
+# Compiled C/C++ #
+##################
+*.elf
+*.obj
+*.ko
+*.o
+*.d
+*.out
+*.exe
+*.dll
+*.so
+*.gch
+*.pch
+*.lib
+*.a
+*.la
+*.lo
+*.dll
+*.so
+*.so.*
+*.dylib
+
+# Linker Output #
+##################
+*.ilk
+*.map
+*.exp
+
+# Executables #
+###############
+*.exe
+*.app
+*.i*86
+*.x86_64
+*.hex
+a.out
+
+# Debug files #
+###############
+*.dSYM/
+*.su
+*.idb
+*.pdb
+
+# Kernel Module Compile Results #
+#################################
+*.mod*
+*.cmd
+.tmp_versions/
+modules.order
+Module.symvers
+Mkfile.old
+dkms.conf

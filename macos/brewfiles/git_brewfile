@@ -1,0 +1,6 @@
+# Brewfile for git
+tap "homebrew/bundle"
+
+brew "git"
+brew "git-lfs"
+

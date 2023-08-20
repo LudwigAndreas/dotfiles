@@ -1,0 +1,10 @@
+# Brewfile for Databases
+tap "homebrew/bundle"
+
+brew "mysql"
+brew "postgresql"
+brew "mongo"
+brew "redis"
+brew "elasticsearch"
+cask "mysqlworkbench", args: { appdir: "~/Applications" }
+

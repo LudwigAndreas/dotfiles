@@ -1,0 +1,26 @@
+# Brewfile for macos utils and common command-line tools
+tap "homebrew/bundle"
+
+# Install GNU core utilities (those that come with macOS are outdated).
+# Don’t forget to add `$(brew --prefix coreutils)/libexec/gnubin` to `$PATH`.
+brew "coreutils"
+# Install some other useful utilities like `sponge`.
+brew "moreutils"
+# Install GNU `find`, `locate`, `updatedb`, and `xargs`, `g`-prefixed.
+brew "findutils"
+# Install GNU `sed`, overwriting the built-in `sed`.
+brew "gnu-sed", args: ["with-default-names"]
+# Install a modern version of Bash.
+brew "bash"
+brew "bash-completion2"
+# Install `wget` with IRI support.
+brew "wget", args: ["with-iri"]
+# Install GnuPG to enable PGP-signing commits.
+brew "gnupg"
+# Install more recent versions of some macOS tools.
+brew "vim", args: ["with-override-system-vi"]
+brew "grep"
+brew "openssh"
+brew "screen"
+brew "php"
+brew "gmp"

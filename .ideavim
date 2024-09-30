@@ -1,0 +1,192 @@
+
+" Source your .vimrc
+source ~/.vimrc
+
+
+" IDEA stuff
+set incsearch
+set ideajoin
+set idearefactormode=keep
+set ideastatusicon=enabled
+set hlsearch
+set ignorecase
+set smartcase
+set incsearch
+set wrapscan
+set gdefault
+set history=10000
+set scrolloff=8 sidescrolloff=8
+set clipboard=unnamedplus,unnamed,ideaput
+set multiple-cursors
+set surround
+
+
+" Plugins
+" highlight copied text
+plug 'machakann/vim-highlightedyank'
+" commentary plugin
+plug 'tpope/vim-commentary'
+" nerdtree plugin
+Plug 'preservim/nerdtree'
+
+
+" Mappings
+let mapleader = " "
+
+map \\ <Action>(ActivateProjectToolWindow)
+
+map [d <Action>(GotoPreviousError)
+map ]d <Action>(GotoNextError)
+
+" Open quick fix window
+nnoremap <leader>q :action ShowIntentionActions<CR>
+
+" Move focus to the left window
+nnoremap <C-h> <C-w>h
+
+" Move focus to the right window
+nnoremap <C-l> <C-w>l
+
+" Move focus to the lower window
+nnoremap <C-j> <C-w>j
+
+" Move focus to the upper window
+nnoremap <C-k> <C-w>k
+
+
+" Search
+" Search Help
+nnoremap <leader>sh :action SearchHelp<CR>
+
+" Search Keymaps
+nnoremap <leader>sk :action GotoAction<CR>
+
+" Search Files
+nnoremap <leader>sf :action GotoFile<CR>
+
+" Search Select (Telescope-like functionality in IntelliJ is "Search Everywhere")
+nnoremap <leader>ss :action SearchEverywhere<CR>
+
+" Search Current Word
+nnoremap <leader>sw :action FindWordAtCaret<CR>
+
+" Search by Grep (Find in Path)
+nnoremap <leader>sg :action FindInPath<CR>
+
+" Search Diagnostics (Show Problems)
+nnoremap <leader>sd :action ActivateProblemsViewToolWindow<CR>
+
+" Search Resume (Switch focus to previous tool window or terminal)
+nnoremap <leader>sr :action PreviousToolWindow<CR>
+
+" Search Neovim Files (Open configuration files - mapped to OpenFile in IntelliJ)
+"nnoremap <leader>sn :action OpenFile<CR>
+
+" Search Recent Files
+nnoremap <leader>s. :action RecentFiles<CR>
+
+" Search in Open Files
+nnoremap <leader>/ :action GotoRecentFile<CR>
+
+" General Search (Search Everywhere with <leader><leader>)
+
+nnoremap <leader><leader> :action SearchEverywhere<CR>
+
+" Search in current file buffer (Find in Editor)
+nnoremap <leader>/ :action Find<CR>
+
+
+"Selection manipulation
+" Close the current popup or dialog
+nnoremap <C-C> :action EditorEscape<CR>
+
+" Move to the next selection (e.g., autocomplete or search result)
+nnoremap <C-N> :action EditorChooseLookupItemDown<CR>
+
+" Move to the previous selection (e.g., autocomplete or search result)
+nnoremap <C-P> :action EditorChooseLookupItemUp<CR>
+
+" Confirm the current selection (e.g., autocomplete or search result)
+nnoremap <C-Y> :action Enter<CR>
+
+" Manually trigger code completion
+nnoremap <C-Space> :action CodeCompletion<CR>
+
+" Scroll down in the autocomplete preview or other popups
+nnoremap <C-D> <C-d>
+
+" Scroll up in the autocomplete preview or other popups
+nnoremap <C-U> <C-u>
+
+
+" Goto actions
+" Go to Definition
+nnoremap gd :action GotoDeclaration<CR>
+
+" Go to Declaration
+nnoremap gD :action GotoSuperMethod<CR>
+
+" Go to Implementation
+nnoremap gI :action GotoImplementation<CR>
+
+" Go to References
+nnoremap gr :action ShowUsages<CR>
+
+" Go to file under cursor
+nnoremap gf :action GotoFileUnderCaret<CR>
+
+" Format code (Reformat Code in IntelliJ)
+nnoremap gw :action ReformatCode<CR>
+
+" Open file path or URI under cursor
+nnoremap gx :action RevealIn<CR>
+
+" Cycle backward through search results
+nnoremap g% :action PreviousOccurence<CR>
+
+" Toggle comment (uses commentary for applying comment)
+"nnoremap gc :action commentbylinecomment<cr>
+set commentary
+
+
+" LSP
+map <leader>oc <Action>(ReformatCode)
+map <leader>oi <Action>(OptimizeImports)
+map <leader>oa <Action>(ReformatCode)<Action>(OptimizeImports)
+map <leader>jev <Action>(IntroduceVariable)
+map <leader>jec <Action>(IntroduceConstant)
+map <leader>jem <Action>(ExtractMethod)
+
+
+map K <Action>(QuickJavaDoc)
+imap <C-s> <Action>(ParameterInfo)
+map <C-s> <Action>(ParameterInfo)
+map <leader>s <Action>(GotoSymbol)
+map <leader>S <Action>(GotoSymbol)
+
+map <leader>a <Action>(ShowIntentionActions)
+
+map <leader><leader>T <Action>(VimFindActionIdAction)
+
+
+" File tree navigation
+" Open NERDTree file tree
+nnoremap \\ :NERDTreeToggle<CR>
+
+"HideActiveWindow
+" Cursor movement between splits
+nnoremap <C-W>w :tabnext<CR>
+nnoremap <C-W>p :tabprevious<CR>
+
+
+" Resize splits
+"nnoremap <C-W>+ <C-w>+
+"nnoremap <C-W>- <C-w>-
+"nnoremap <C-W>< <C-w><
+"nnoremap <C-W>> <C-w>>
+
+
+" Close splits
+nnoremap <C-W>c :close<CR>
+nnoremap <C-W>q :q<CR>
+nnoremap <C-W>o :only<CR>

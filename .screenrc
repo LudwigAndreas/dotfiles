@@ -1,0 +1,14 @@
+# Disable the startup message
+startup_message off
+
+# Set a large scrollback buffer
+defscrollback 5000
+
+# Set the window title
+hardstatus alwayslastline "%{= kw} %H %{r}%-w%{r}%n %t%{-}%+w %=%{g}%l %{b}%Y-%m-%d %c"
+
+# Set the scrollback buffer to 5000 lines
+defscrollback 5000
+
+# Always start `screen` with UTF-8 enabled (`screen -U`)
+defutf8 on

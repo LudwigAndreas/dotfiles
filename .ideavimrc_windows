@@ -1,0 +1,100 @@
+source ~/.vimrc
+" IDEA stuff 
+set incsearch 
+set ideajoin 
+set idearefactormode=keep 
+set ideastatusicon=enabled 
+set hlsearch 
+set ignorecase 
+set smartcase 
+set incsearch 
+set wrapscan 
+set gdefault 
+set history=10000
+set scrolloff=8 sidescrolloff=8 
+set clipboard-unnamedplus, unnamed, ideaput 
+set multiple-cursors 
+set surround 
+set relativenumber
+" Plugins plug 'machakann/vim-highlightedyank' plug 'pope/vim-commentary'
+Plug 'preservin/nerdtree'
+set easymotion set NERDTree
+" Mappings let mapleader
+map [d :action GotoPreviousError)
+map ]d :action CotoNextError)
+noremap <Leader>g :action ShowIntentionActions<CR> 
+noremap <C-BS> <C-w>h 
+noremap <C-l> <C-w>l 
+noremap <C-i> <C-w>j 
+noremap <C-k> <C-W>k
+"Search
+noremap <leader>sh :action SearchHelp<CR>
+noremap <leader>sk :action GotoAction<CR> 
+noremap <leader>sf :action GotoFile<CR> 
+noremap <leader>ss :action SearchEverywhere<CR> 
+noremap <leader>sw :action Find<CR> 
+noremap <leader>sg :action FindInPath<CR>
+"Search
+noremap <leader>sh :action SearchHelp<CR>
+noremap <leader>sk :action GotoAction<CR> 
+noremap <leader>sf :action GotoFile<CR> 
+noremap <leader>ss :action SearchEverywhere<CR> 
+noremap <leader>sw :action Find<CR> 
+noremap <leader>sg :action FindInPath<CR> 
+noremap <leader>sd :action ActivateProblemsViewToolWindow<CR> 
+noremap <leader>sr :action Replace<CR> 
+noremap <leader>s. :action RecentFiles<CR> 
+noremap <leader><leader> :action SearchEverywhere<CR> 
+noremap <leader>/ :action Find<CR>
+" Run commands 
+noremap <leader>ra :action RunAnything<CR> 
+noremap <leader>rm :action Maven.ExecuteGoal<CR> 
+noremap <leader>rp :action ChooseRunConfiguration<C>
+"Selection manipulation
+noremap <C-C> :action EditorEscape<CR>
+noremap <C-N> :action EditorChooseLookupItemDown<CR> 
+noremap <C-P> :action EditorChooseLookupItemUp<CR> 
+noremap <C-Y> :action Enter<CR> 
+noremap <C-Space> :action CodeCompletion<CR> 
+noremap <C-D> <C-d>
+noremap <C-U> <C-U>
+" Goto actions
+noremap gd :action GotoDeclaration<CR> 
+noremap gD :action GotoSuperMethod<CR> 
+noremap gI :action GotoImplementation<CR> 
+noremap gr :action ShowUsages<CR> 
+noremap gf action GotoFileUnderCaret<CR> 
+noremap gw :action ReformatCode<CR> 
+noremap g :action RevealIn<CR> 
+noremap g% :action Previous0ccurence<CR> 
+noremap gn :e ~/ .ideavimrc<CR>
+set commentary
+"LSP
+map <leader>oc :action ReformatCode<CR>
+map <leader>oi :action OptimizeImports<CR>
+map <leader>oa :action ReformatCode :action OptimizeImports<CR>
+map <leader>jev :action IntroduceVariable<CR>
+map <leader>jec :action IntroduceConstant<CR>
+map <leader>jem :action ExtractMethod<CR>
+
+mар К :action QuickJavaDoc<CR>
+imap <C-s> :action ParameterInfo<CR>
+map <C-s> :action ParameterInfo<CR>
+map <leader>a :action ShowIntentionActions<CR>
+map <leader><leader>T :action VimFindActionIdAction<CR>
+" File tree navigation 
+noremap \ :NERDTree<CR>
+" Tab 
+noremap <C-TAB> :tabnext<CR> 
+noremap <C-S-TAB> :tabprevious<CR> 
+noremap <C-\> :action SplitVertically<CR>
+noremap <C-S--> :action SplitHorizontally CR>
+noremap <C-m> :action MoveEditorToOppositeTabGroup<CR>
+" Windows
+noremap <C-e> :action EditSourceInNewWindow<CR>
+" Close splits
+noremap <C-W> :action CloseContent<CR>
+noremap <C-S-W> :action CloseAllEditors<CR>
+" Terminal
+noremap <C-t> :action ActivateTerminalToolWindow<CR>
+noremap <leader>t :action Terminal. OpenInTerminal<CR>

@@ -1,78 +1,139 @@
+" Vim stuff
 source ~/.vimrc
+set relativenumber
+set num 
+
+" move to the beginning of the next word
+map w [w
+" move to the end of the next word
+map e ]w
+" move to the beginning of the previous word
+map b [b
+" move to the end of the previous word
+map ge ]b
+
 " IDEA stuff 
 set incsearch 
-set ideajoin 
+" smart line joining with <S-J>
+set ideajoin
 set idearefactormode=keep 
 set ideastatusicon=enabled 
-set hlsearch 
-set ignorecase 
-set smartcase 
-set incsearch 
+" sync vim clipboard with system clipboard
+set clipboard^=unnamed,unnamedplus
+" jump between angle brackets with %
+set matchpairs+=<:>
+" highlight search
+set hlsearch
+" disable highlight after escape
+nnoremap <Esc> :nohlsearch<CR>
+" ignore case when searching
+set ignorecase
+" enable case sensitive search when using capital letters
+set smartcase
+" enable incremental search
+set incsearch
 set wrapscan 
 set gdefault 
 set history=10000
 set scrolloff=8 sidescrolloff=8 
-set clipboard-unnamedplus, unnamed, ideaput 
 set multiple-cursors 
+
+
+
+" Plugins 
+plug 'machakann/vim-highlightedyank' 
+plug 'pope/vim-commentary'
+plug 'preservin/nerdtree'
+
+set easymotion 
 set surround 
-set relativenumber
-" Plugins plug 'machakann/vim-highlightedyank' plug 'pope/vim-commentary'
-Plug 'preservin/nerdtree'
-set easymotion set NERDTree
+set commentary
+
+" map black whole register
+noremap \ "_
+" paste over without overwriting default register
+xnoremap p P
 " Mappings let mapleader
-map [d :action GotoPreviousError)
-map ]d :action CotoNextError)
 noremap <Leader>g :action ShowIntentionActions<CR> 
 noremap <C-BS> <C-w>h 
 noremap <C-l> <C-w>l 
 noremap <C-i> <C-w>j 
 noremap <C-k> <C-W>k
+
+
+" Additional vim actions
+nnoremap <leader>o o<Esc>
+nnoremap <leader>O O<Esc>
+
+
 "Search
-noremap <leader>sh :action SearchHelp<CR>
-noremap <leader>sk :action GotoAction<CR> 
-noremap <leader>sf :action GotoFile<CR> 
-noremap <leader>ss :action SearchEverywhere<CR> 
-noremap <leader>sw :action Find<CR> 
-noremap <leader>sg :action FindInPath<CR>
-"Search
-noremap <leader>sh :action SearchHelp<CR>
-noremap <leader>sk :action GotoAction<CR> 
-noremap <leader>sf :action GotoFile<CR> 
-noremap <leader>ss :action SearchEverywhere<CR> 
-noremap <leader>sw :action Find<CR> 
-noremap <leader>sg :action FindInPath<CR> 
-noremap <leader>sd :action ActivateProblemsViewToolWindow<CR> 
-noremap <leader>sr :action Replace<CR> 
-noremap <leader>s. :action RecentFiles<CR> 
-noremap <leader><leader> :action SearchEverywhere<CR> 
-noremap <leader>/ :action Find<CR>
-" Run commands 
+map <leader>fc :action GotoClass<CR>
+map <leader>ff :action GotoFile<CR>
+map <leader>fs :action GotoSymbols<CR>
+map <leader>fk :action GotoAction<CR>
+map <leader>fa :action SearchEverywhere<CR>
+map <leader>fw :action FindWordAtCaret<CR>
+map <leader>fr :action Replace<CR> 
+map <leader>f. :action RecentFiles<CR> 
+map <leader>fvr viwy \| :%s/\<<C-r>+\>/<C-r><C-w>/gI<Left><Left><Left>
+
+
+" Run anything
 noremap <leader>ra :action RunAnything<CR> 
 noremap <leader>rm :action Maven.ExecuteGoal<CR> 
-noremap <leader>rp :action ChooseRunConfiguration<C>
+noremap <leader>rc :action ChooseRunConfiguration<CR>
+noremap <leader>rp :action TogglePresentationMode<CR>
+noremap <leader>rq :action ActivateProblemsViewToolWindow<CR>
+
+
 "Selection manipulation
-noremap <C-C> :action EditorEscape<CR>
-noremap <C-N> :action EditorChooseLookupItemDown<CR> 
-noremap <C-P> :action EditorChooseLookupItemUp<CR> 
-noremap <C-Y> :action Enter<CR> 
-noremap <C-Space> :action CodeCompletion<CR> 
+nnoremap <C-f> :action CodeCompletion<CR>
 noremap <C-D> <C-d>
 noremap <C-U> <C-U>
+
+
 " Goto actions
-noremap gd :action GotoDeclaration<CR> 
-noremap gD :action GotoSuperMethod<CR> 
-noremap gI :action GotoImplementation<CR> 
-noremap gr :action ShowUsages<CR> 
-noremap gf action GotoFileUnderCaret<CR> 
-noremap gw :action ReformatCode<CR> 
-noremap g :action RevealIn<CR> 
-noremap g% :action Previous0ccurence<CR> 
-noremap gn :e ~/ .ideavimrc<CR>
-set commentary
-"LSP
-map <leader>oc :action ReformatCode<CR>
+noremap [d :action GotoPreviousError<CR>
+noremap ]d :action CotoNextError<CR>
+
+noremap g[ :action PreviousOccurence<CR>
+noremap g] :action NextOccurence<CR>
+
+nnoremap <leader>gg :action Generate<CR>
+nnoremap <leader>gt :action GotoTest<CR>
+nnoremap <leader>gtm :action GenerateTestMethod<CR>
+
+noremap <leader>gd :action GotoDeclaration<CR> 
+noremap <leader>gy :action GotoTypeDeclaration<CR>
+noremap <leader>gD :action GotoSuperMethod<CR> 
+noremap <leader>gI :action GotoImplementation<CR> 
+noremap <leader>gf :action GotoFileUnderCaret<CR>
+noremap <leader>gu :action ShowUsages<CR>
+noremap <leader>gx :action RevealIn<CR> 
+noremap <leader>gl :action GotoLine<CR>
+noremap <leader>gs :action ViewSource<CR>
+noremap <leader>go :action FileStructurePopup<CR>
+
+
+" Type info
+noremap <leader>td :action QuickTypeDefinition<CR>
+noremap <leader>ti :action ExpressionTypeInfo<CR>
+noremap <leader>tt :action ShowHoverInfo<CR>
+noremap <leader>th :action QuickTypeHierarchy<CR>
+
+
+" Config
+nnoremap <leader>cc :e ~/.ideavimrc<CR>
+nnoremap <leader>cs :source ~/.ideavimrc<CR>
+
+
+" Optimise
 map <leader>oi :action OptimizeImports<CR>
+map <leader>oc :action ReformatCode<CR>
 map <leader>oa :action ReformatCode :action OptimizeImports<CR>
+
+
+" LSP
 map <leader>jev :action IntroduceVariable<CR>
 map <leader>jec :action IntroduceConstant<CR>
 map <leader>jem :action ExtractMethod<CR>
@@ -81,20 +142,55 @@ mар К :action QuickJavaDoc<CR>
 imap <C-s> :action ParameterInfo<CR>
 map <C-s> :action ParameterInfo<CR>
 map <leader>a :action ShowIntentionActions<CR>
-map <leader><leader>T :action VimFindActionIdAction<CR>
+
+
 " File tree navigation 
 noremap \ :NERDTree<CR>
-" Tab 
-noremap <C-TAB> :tabnext<CR> 
-noremap <C-S-TAB> :tabprevious<CR> 
-noremap <C-\> :action SplitVertically<CR>
-noremap <C-S--> :action SplitHorizontally CR>
-noremap <C-m> :action MoveEditorToOppositeTabGroup<CR>
+
+
+" Tab / Window / Buffer navigation
+map <C-TAB> :tabnext<CR> 
+map <C-S-TAB> :tabprevious<CR> 
+map <leader>tf :tabfirst<CR>
+map <leader>tm :tabmove<CR>
+map <leader>tl :tablast<CR>
+
+map <leader>wv :action SplitVertically<CR>
+map <leader>wh :action SplitHorizontally <CR>
+map <leader>wr :action MoveTabRight<CR>
+map <leader>wl :action MoveTabLeft<CR>
+map <leader>wm :action MoveEditorToOppositeTabGroup<CR>
+" Close split
+map <leader>ww :action Unsplit<CR>
+" Close all splits
+map <leader>wa :action UnsplitAll<CR>
+
 " Windows
 noremap <C-e> :action EditSourceInNewWindow<CR>
+
 " Close splits
 noremap <C-W> :action CloseContent<CR>
 noremap <C-S-W> :action CloseAllEditors<CR>
+
 " Terminal
 noremap <C-t> :action ActivateTerminalToolWindow<CR>
-noremap <leader>t :action Terminal. OpenInTerminal<CR>
+
+
+"Git
+noremap <leader>GS :action Vcs.QuickListPopupAction<CR>
+noremap <leader>GB :action Vcs.QuickBranchPopupAction<CR>
+noremap <leader>GA :action Vcs.Git.Add<CR>
+noremap <leader>GC :action Vcs.CommitProject<CR>
+noremap <leader>GPS :action Vcs.Push<CR>
+noremap <leader>GPL :action Vcs.Pull<CR>
+noremap <leader>GU :action Vcs.UpdateProject<CR>
+noremap <leader>GL :action Vcs.GitLog<CR>
+noremap <leader>GH :action Vcs.Git.ShowHistory<CR>
+noremap <leader>GH :action Vcs.Git.ShowHistoryForSelection<CR>
+noremap <leader>GD :action Vcs.Git.ShowCommitDetails<CR>
+noremap <leader>GR :action Vcs.Git.Rebase<CR>
+noremap <leader>GM :action Vcs.Git.Merge<CR>
+noremap <leader>GS :action Vcs.Git.StashChanges<CR>
+noremap <leader>GF :action Vcs.Git.Fetch<CR>
+noremap <leader>GC :action Vcs.Git.Commit<CR>
+

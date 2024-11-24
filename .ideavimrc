@@ -1,9 +1,25 @@
-" Source your .vimrc
+""" Map leader to space -------------------------------------------
+let mapleader = " "
+
+""" Vim configuration -------------------------------------------
 " source ~/.vimrc
 
 set relativenumber
-set num
+set nu
+set clipboard^=unnamed,unnamedplus
+set matchpairs+=<:>
+set hlsearch
+" disable highlight after escape
+nnoremap <Esc> :nohlsearch<CR>
+set ignorecase
+set smartcase
+set incsearch
+set wrapscan
+set gdefault
+set history=10000
+set scrolloff=8 sidescrolloff=8
 
+""" Vim mappings -------------------------------------------
 " map black whole register
 noremap \ "_
 " paste over without overwriting default register
@@ -17,176 +33,153 @@ map e ]w
 map b [b
 " move to the end of the previous word
 map ge ]b
-
-" IDEA stuff
-" smart line joining with <S-J>
-set ideajoin
-set idearefactormode=keep
-set ideastatusicon=enabled
-" sync vim clipboard with system clipboard
-set clipboard^=unnamed,unnamedplus
-" jump between angle brackets with %
-set matchpairs+=<:>
-" highlight search
-set hlsearch
-" disable highlight after escape
-nnoremap <Esc> :nohlsearch<CR>
-" ignore case when searching
-set ignorecase
-" enable case sensitive search when using capital letters
-set smartcase
-" enable incremental search
-set incsearch
-set wrapscan
-set gdefault
-set history=10000
-set scrolloff=8 sidescrolloff=8
+" add new line without entering edit mode
+nnoremap <leader>o o<Esc>
+nnoremap <leader>O O<Esc>
 
 
-" Plugins
-Plug 'machakann/vim-highlightedyank'
-Plug 'tpope/vim-commentary'
-Plug 'preservim/nerdtree'
-set easymotion
-set multiple-cursors
-" set surround
-set commentary
-
-
-" Mappings
-let mapleader = " "
-
-
-" General
-nnoremap <leader>q :action ShowIntentionActions<CR>
+""" Movement between splits -------------------------------------------
 nnoremap <C-h> <C-w>h
+" Mapping for virtual machine settings
+nnoremap <C-BS> <C-w>h
 nnoremap <C-l> <C-w>l
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 
-" Additional vim actions
-nnoremap <leader>o o<Esc>
-nnoremap <leader>O O<Esc>
+nnoremap <C-D> <C-d>
+nnoremap <C-U> <C-u>
 
-" Search
+
+""" Tab/Window/Buffer/Split navigation -------------------------------------------
+map <C-TAB> :tabnext<CR>
+map <C-S-TAB> :tabprevious<CR>
+
+map <leader>tf :tabfirst<CR>
+map <leader>tm :tabmove<CR>
+map <leader>tl :tablast<CR>
+
+
+""" IdeaVim configuration -------------------------------------------
+set ideajoin
+set idearefactormode=keep
+set ideastatusicon=enabled
+
+
+""" Plugins -------------------------------------------
+set nerdtree
+set highlightedyank
+set commentary
+set easymotion
+set surround
+set multiple-cursors
+
+
+""" File tree navigation -------------------------------------------
+noremap \ :NERDTree<CR>
+
+
+""" Config -------------------------------------------
+nnoremap <leader>cc :e ~/.ideavimrc<CR>
+nnoremap <leader>cs :action IdeaVim.ReloadVimRc.reload<CR>
+
+
+""" Search -------------------------------------------
 noremap <leader>fc :action GotoClass<CR>
 noremap <leader>ff :action GotoFile<CR>
 noremap <leader>fs :action GotoSymbol<CR>
 noremap <leader>fk :action GotoAction<CR>
 noremap <leader>fa :action SearchEverywhere<CR>
-noremap <leader>fw :action FindInPath<CR>
+noremap <leader>fg :action FindInPath<CR>
+noremap <leader>fw :action FindWordAtCaret<CR>
+noremap <leader>fr :action Replace<CR>
+nnoremap <leader>f/ :action RecentFiles<CR>
+nnoremap <leader>f. :action SelectInProjectView<CR>
 " Find and replace word under cursor (ideavim adaptation)
-nmap <leader>fr viwy \| :%s/\<<C-r>+\>/<C-r><C-w>/gI<Left><Left><Left>
+noremap <leader>fvr viwy \| :%s/\<<C-r>+\>/<C-r><C-w>/gI<Left><Left><Left>
 "vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
-nnoremap <leader>f. :action RecentFiles<CR>
-nnoremap <leader>fa :action SearchEverywhere<CR>
-nnoremap <leader>/ :action Find<CR>
 
 
-"Selection manipulation
-nnoremap <C-f> :action CodeCompletion<CR>
-nnoremap <C-D> <C-d>
-nnoremap <C-U> <C-u>
+""" Run -------------------------------------------
+noremap <leader>rr :action Run<CR>
+noremap <leader>rd :action Debug<CR>
+noremap <leader>ra :action RunAnything<CR>
+noremap <leader>rm :action Maven.ExecuteGoal<CR>
+noremap <leader>rc :action ChooseRunConfiguration<CR>
 
-" Goto actions
-map [d <Action>(GotoPreviousError)
-map ]d <Action>(GotoNextError)
 
-nnoremap g[ :action PreviousOccurence<CR>
-nnoremap g] :action NextOccurence<CR>
+""" Toggle -------------------------------------------
+noremap <leader><leader> :action CodeCompletion<CR>
+noremap <leader>q :action ShowIntentionActions<CR>
+noremap <leader>tp :action TogglePresentationMode<CR>
+noremap <leader>td :action ToggleDistractionFreeMode<CR>
+noremap <leader>tq :action ActivateProblemsViewToolWindow<CR>
+noremap <leader>ta :action Annotate<CR>
+noremap <leader>tg :action Vcs.QuickListPopupAction<CR>
+noremap <leader>tr :action ChooseRunConfiguration<CR>
+
+" noremap <leader>td :action QuickTypeDefinition<CR>
+" noremap <leader>ti :action ExpressionTypeInfo<CR>
+" noremap <leader>tt :action ShowHoverInfo<CR>
+" noremap <leader>th :action QuickTypeHierarchy<CR>
+
+
+""" Goto actions -------------------------------------------
+map [d :action GotoPreviousError<CR>
+map ]d :action GotoNextError<CR>
+map g[ :action PreviousOccurence<CR>
+map g] :action NextOccurence<CR>
+
+nnoremap gd :action GotoDeclaration<CR>
+nnoremap gy :action GotoTypeDeclaration<CR>
+nnoremap gD :action GotoSuperMethod<CR>
+nnoremap gI :action GotoImplementation<CR>
+nnoremap gu :action ShowUsages<CR>
+nnoremap gf :action GotoFileUnderCaret<CR>
+nnoremap gx :action RevealIn<CR>
+nnoremap gl :action GotoLine<CR>
+nnoremap gs :action ViewSource<CR>
+nnoremap go :action FileStructurePopup<CR>
+
+
+""" Generating -------------------------------------------
+nnoremap <leader>gg :action Generate<CR>
+nnoremap <leader>gtm :action GenerateTestMethod<CR>
+nnoremap <leader>gt :action GotoTest<CR>
+
+
+""" Code actions -------------------------------------------
 
 imap <C-n> <ESC>:action HippieCompletion<CR>
 imap <C-p> <ESC>:action HippieBackwardCompletion<CR>
 
-nnoremap <leader>gg :action Generate<CR>
-nnoremap <leader>gt :action GotoTest<CR>
-nnoremap <leader>gtm :action GenerateTestMethod<CR>
+map <leader>oi :action OptimizeImports
+map <leader>oc :action ReformatCode
+map <leader>oa :action ReformatCode<CR>:action OptimizeImports<CR>
 
-nnoremap <leader>gd :action GotoDeclaration<CR>
-nnoremap <leader>gy :action GotoTypeDeclaration<CR>
-nnoremap <leader>gD :action GotoSuperMethod<CR>
-nnoremap <leader>gI :action GotoImplementation<CR>
-nnoremap <leader>gu :action ShowUsages<CR>
-nnoremap <leader>gf :action GotoFileUnderCaret<CR>
-nnoremap <leader>gx :action RevealIn<CR>
-nnoremap <leader>gl :action GotoLine<CR>
-nnoremap <leader>gs :action ViewSource<CR>
-nnoremap <leader>go :action FileStructurePopup<CR>
-
-" Type info
-noremap <leader>td :action QuickTypeDefinition<CR>
-noremap <leader>ti :action ExpressionTypeInfo<CR>
-noremap <leader>tt :action ShowHoverInfo<CR>
-noremap <leader>th :action QuickTypeHierarchy<CR>
-
-" Config
-nnoremap <leader>cc :e ~/.ideavimrc<CR>
-nnoremap <leader>cs :source ~/.ideavimrc<CR>
-
-"Git
-nnoremap <leader>GS :action Vcs.QuickListPopupAction<CR>
-nnoremap <leader>GB :action Vcs.QuickBranchPopupAction<CR>
-nnoremap <leader>GA :action Vcs.Git.Add<CR>
-nnoremap <leader>GC :action Vcs.CommitProject<CR>
-nnoremap <leader>GPS :action Vcs.Push<CR>
-nnoremap <leader>GPL :action Vcs.Pull<CR>
-nnoremap <leader>GU :action Vcs.UpdateProject<CR>
-nnoremap <leader>GL :action Vcs.GitLog<CR>
-nnoremap <leader>GH :action Vcs.Git.ShowHistory<CR>
-nnoremap <leader>GH :action Vcs.Git.ShowHistoryForSelection<CR>
-nnoremap <leader>GD :action Vcs.Git.ShowCommitDetails<CR>
-nnoremap <leader>GR :action Vcs.Git.Rebase<CR>
-nnoremap <leader>GM :action Vcs.Git.Merge<CR>
-nnoremap <leader>GS :action Vcs.Git.StashChanges<CR>
-nnoremap <leader>GF :action Vcs.Git.Fetch<CR>
-nnoremap <leader>GC :action Vcs.Git.Commit<CR>
-
-
-" LSP
-map <leader>oc <Action>(ReformatCode)
-map <leader>oi <Action>(OptimizeImports)
-map <leader>oa <Action>(ReformatCode)<Action>(OptimizeImports)
-
-map <leader>jev <Action>(IntroduceVariable)
-map <leader>jec <Action>(IntroduceConstant)
-map <leader>jem <Action>(ExtractMethod)
-
-" Running
-noremap <leader>ra :action RunAnything<CR>
-noremap <leader>rm :action Maven.ExecuteGoal<CR>
-noremap <leader>rc :action ChooseRunConfiguration<CR>
-noremap <leader>rp :action TogglePresentationMode<CR>
-noremap <leader>rq :action ActivateProblemsViewToolWindow<CR>
+map <leader>jev :action IntroduceVariable
+map <leader>jec :action IntroduceConstant
+map <leader>jem :action ExtractMethod
 
 map K :action QuickJavaDoc<CR>
-imap <C-s> :action ParameterInfo<CR>
 map <C-s> :action ParameterInfo<CR>
+imap <C-s> :action ParameterInfo<CR>
 map <leader>a :action ShowIntentionActions<CR>
 
-" File tree navigation
-" nnoremap \\ :NERDTree<CR>
 
-" Tab/Window/Buffer navigation
-nnoremap <C-TAB> :tabnext<CR>
-nnoremap <C-S-TAB> :tabprevious<CR>
-nnoremap <leader>tf :tabfirst<CR>
-nnoremap <leader>tm :tabmove<CR>
-nnoremap <leader>tl :tablast<CR>
-
+""" Tab/Window/Buffer/Split actions -------------------------------------------
 map <leader>wv :action SplitVertically<CR>
 map <leader>wh :action SplitHorizontally<CR>
 map <leader>wr :action MoveTabRight<CR>
 map <leader>wl :action MoveTabLeft<CR>
 map <leader>wm :action MoveEditorToOppositeTabGroup<CR>
-" Close split
 map <leader>ww :action Unsplit<CR>
-" Close all splits
 map <leader>wa :action UnsplitAll<CR>
-
-map <C-e> :action EditSourceInNewWindow<CR>
 map <C-W> :action CloseContent<CR>
 map <C-S-W> :action CloseAllEditors<CR>
 
-" Terminal
+
+""" Tools shortcuts -------------------------------------------
+map <C-e> :action EditSourceInNewWindow<CR>
 nnoremap <C-t> :action ActivateTerminalToolWindow<CR>
+
 

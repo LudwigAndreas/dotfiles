@@ -1,4 +1,3 @@
-
 #!/bin/bash
 
 # Time interval between keep-alive signals (in seconds)

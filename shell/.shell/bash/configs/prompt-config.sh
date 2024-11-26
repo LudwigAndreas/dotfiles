@@ -67,9 +67,9 @@ success_symbol="❯"
 
 # Set the terminal title and prompt.
 PS1="\n\[${cyan}\]\W\007\]";
-PS1+="\$(prompt_git \"\[${white}\] on \[${purple}\]\" \"\[${red}\]\")";
+PS1+="\$(prompt_git \"\[${reset}\] on \[${purple}\]\" \"\[${red}\]\")";
 PS1+="\n";
-PS1+="\[${green}\]${success_symbol}${success_symbol} \[${reset}\]";
+PS1+="\[${green}\]${success_symbol} \[${reset}\]";
 export PS1;
 
 PS2="\[${yellow}\]→ \[${reset}\]";

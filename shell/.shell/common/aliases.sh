@@ -48,7 +48,7 @@ alias which-command=whence
 
 # Alias for nvim
 alias vim=nvim
-alias vvim=vim
+alias vvim=/usr/bin/vim
 
 # Always enable colored `grep` output
 # Note: `GREP_OPTIONS="--color=auto"` is deprecated, hence the alias usage.

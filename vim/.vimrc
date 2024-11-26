@@ -96,13 +96,14 @@ if has("autocmd")
 au VimLeave * silent execute '!echo -ne "\e[ q"' | redraw!
 endif
 
+
 """ Movement between splits ---------------------------------------------------
-nnoremap <C-h> <C-w>h
+" nnoremap <C-h> <C-w>h
 " Mapping for virtual machine settings
-nnoremap <C-BS> <C-w>h
-nnoremap <C-l> <C-w>l
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
+" nnoremap <C-BS> <C-w>h
+" nnoremap <C-l> <C-w>l
+" nnoremap <C-j> <C-w>j
+" nnoremap <C-k> <C-w>k
 
 nnoremap <C-D> <C-d>
 nnoremap <C-U> <C-u>
@@ -159,10 +160,21 @@ Plug 'easymotion/vim-easymotion'
 Plug 'bagrat/vim-buffet'
 Plug 'ryanoasis/vim-devicons'
 " Plug 'tmux-plugins/vim-tmux-focus-events'
-" Plug 'christoomey/vim-tmux-navigator'
+Plug 'christoomey/vim-tmux-navigator'
 
 " Initialize plugin system
 call plug#end()
+
+
+" TmuxNavigator
+let g:tmux_navigator_no_mappings = 1
+let g:tmux_navigator_save_on_switch = 2
+nnoremap <C-h> :TmuxNavigateLeft<CR>
+" Mapping for virtual machine settings
+" nnoremap <C-BS> <C-w>h
+nnoremap <C-l> :TmuxNavigateRight<CR>
+nnoremap <C-j> :TmuxNavigateDown<CR>
+nnoremap <C-k> :TmuxNavigateLeft<CR>
 
 """ File tree navigation ------------------------------------------------------
 

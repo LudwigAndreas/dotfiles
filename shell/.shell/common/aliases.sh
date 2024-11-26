@@ -46,6 +46,10 @@ rd="rmdir"
 alias run-help=man
 alias which-command=whence
 
+# Alias for nvim
+alias vim=nvim
+alias vvim=vim
+
 # Always enable colored `grep` output
 # Note: `GREP_OPTIONS="--color=auto"` is deprecated, hence the alias usage.
 alias grep='grep --color=auto'

@@ -50,7 +50,7 @@ nnoremap <C-D> <C-d>
 nnoremap <C-U> <C-u>
 
 
-""" Tab/Window/Buffer/Split navigation -------------------------------------------
+""" Tab/Window/Buffer/Split navigation ------------------------------------------
 map <C-TAB> :tabnext<CR>
 map <C-S-TAB> :tabprevious<CR>
 
@@ -78,7 +78,7 @@ set multiple-cursors
 noremap \ :NERDTree<CR>
 
 
-""" Config -------------------------------------------
+
 nnoremap <leader>cc :e ~/.ideavimrc<CR>
 nnoremap <leader>cs :action IdeaVim.ReloadVimRc.reload<CR>
 

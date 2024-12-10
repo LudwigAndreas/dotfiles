@@ -1,0 +1,89 @@
+// Place your key bindings in this file to override the defaultsa
+[
+  {
+    "key": "\\",
+    "command": "workbench.view.explorer",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+tab",
+    "command": "workbench.action.nextEditorInGroup"
+  },
+  {
+    "key": "ctrl+shift+tab",
+    "command": "workbench.action.previousEditorInGroup"
+  },
+  {
+    "key": "ctrl+k",
+    "command": "workbench.action.navigateUp"
+  },
+  {
+    "key": "ctrl+j",
+    "command": "workbench.action.navigateDown"
+  },
+  {
+    "key": "ctrl+h",
+    "command": "workbench.action.navigateLeft"
+  },
+  {
+    "key": "ctrl+l",
+    "command": "workbench.action.navigateRight"
+  },
+  {
+    "key": "ctrl+h",
+    "when": "panelFocus",
+    "command": "workbench.action.previousPanelView"
+  },
+  {
+    "key": "ctrl+l",
+    "when": "panelFocus",
+    "command": "workbench.action.nextPanelView"
+  },
+  {
+    "key": "ctrl+k",
+    "when": "sideBarFocus && explorerViewletVisible",
+    "command": "workbench.files.action.focusOpenEditorsView"
+  },
+  {
+    "key": "ctrl+j",
+    "when": "sideBarFocus && explorerViewletVisible && !filesExplorerFocus",
+    "command": "workbench.files.action.focusFilesExplorer"
+  },
+  // Sidebar Nerdtree-like configuration
+  {
+    "key": "escape",
+    "when": "sideBarFocus && explorerViewletVisible",
+    "command": "workbench.action.focusLastEditorGroup"
+  },
+  {
+    "key": "q",
+    "when": "sideBarFocus && explorerViewletVisible",
+    "command": "workbench.action.closeSidebar"
+  },
+  {
+    "key": "q",
+    "when": "sideBarFocus && explorerViewletVisible",
+    "command": "workbench.action.closeSidebar"
+  },
+  {
+    "key": "q",
+    "when": "sideBarFocus && explorerViewletVisible",
+    "command": "workbench.action.closeSidebar"
+  },
+  {
+    "key": "q",
+    "when": "sideBarFocus && explorerViewletVisible",
+    "command": "workbench.action.closeSidebar"
+  },
+  {
+    "key": "q",
+    "when": "sideBarFocus && explorerViewletVisible",
+    "command": "workbench.action.closeSidebar"
+  },
+  {
+    "key": "q",
+    "when": "sideBarFocus && explorerViewletVisible",
+    "command": "workbench.action.closeSidebar"
+  },
+
+]

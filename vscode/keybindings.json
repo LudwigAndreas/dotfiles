@@ -86,7 +86,7 @@
     "command": "explorer.newFile"
   },
   {
-    "key": "N",
+    "key": "shift+n",
     "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus",
     "command": "explorer.newFolder"
   },

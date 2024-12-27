@@ -17,13 +17,7 @@ alias 7="cd -7"
 alias 8="cd -8"
 alias 9="cd -9"
 
-# Shortcuts
-alias d="cd ~/Documents/GoogleDrive"
-alias dl="cd ~/Downloads"
-alias dt="cd ~/Desktop"
-alias p="cd ~/Projects"
-alias g="git"
-
+{ gls --color -d . >/dev/null 2>&1 && ls=gls; }
 # List all files colorized in long format
 alias l="ls -lahF ${colorflag}"
 
@@ -46,8 +40,7 @@ rd="rmdir"
 alias run-help=man
 alias which-command=whence
 
-# Alias for nvim
-alias vim=nvim
+# Back compatibility with nvim
 alias vvim=/usr/bin/vim
 
 # Always enable colored `grep` output
@@ -69,26 +62,16 @@ alias week='date +%V'
 alias month='date +%m'
 
 # IP addresses
-alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias localip="ipconfig getifaddr en0"
 alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)'"
 
 # URL-encode strings
 alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1]);"'
 
-# Merge PDF files, preserving hyperlinks
-# Usage: `mergepdf input{1,2,3}.pdf`
-alias mergepdf='gs -q -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile=_merged.pdf'
-
 # Intuitive map function
 # For example, to list all directories that contain a certain file:
 # find . -name .gitattributes | map dirname
 alias map="xargs -n1"
-
-# Kill all the tabs in Chrome to free up memory
-# [C] explained: http://www.commandlinefu.com/commands/view/402/exclude-grep-from-your-grepped-output-of-ps-alias-included-in-description
-alias chromekill="ps ux | grep '[C]hrome Helper --type=renderer' | grep -v extension-process | tr -s ' ' | cut -d ' ' -f2 | xargs kill"
-
 
 # Reload the shell (i.e. invoke as a login shell)
 alias reload="exec ${SHELL} -l"

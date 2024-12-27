@@ -1,2 +1,3 @@
-source $HOME/.shell/common/index.sh
+source $HOME/.shell/sh/index.sh
+source $HOME/.shell/bash/index-reduced.sh
 source $HOME/.shell/zsh/index.sh

@@ -57,7 +57,13 @@ let mapleader = " "
 
 """ Basic mappings ------------------------------------------------------------
 " map black whole register
-noremap \ "_
+" noremap ~ "_
+" Toggle Vexplore with \
+nnoremap \ :Lexplore<CR>
+let g:netrw_liststyle = 3
+let g:netrw_winsize=25
+let g:netrw_alto=1
+
 " paste over without overwriting default register
 xnoremap p P
 
@@ -112,95 +118,37 @@ nnoremap <C-U> <C-u>
 """ Tab/Window/Buffer/Split actions -------------------------------------------
 map <leader>wv :vsplit<CR>
 map <leader>wh :split<CR>
-map <leader>wl <C-W>L
-map <leader>wj <C-W>J
-map <leader>wk <C-W>K
-map <leader>wh <C-W>H
+map <leader>wml <C-W>L
+map <leader>wmj <C-W>J
+map <leader>wmk <C-W>K
+map <leader>wmh <C-W>H
 map gn :bnext<CR>
 map gp :bprevious<CR>
-" map <leader>wm :action MoveEditorToOppositeTabGroup<CR>
-map <leader>ww :bdelete<CR>
-"map <leader>wa :action UnsplitAll<CR>
-" map <C-W> <C-w>o
-"map <C-S-W> :q<CR>
+noremap <C-W> :wq<CR>
 
 
 """ Tab/Window/Buffer/Split navigation ----------------------------------------
-" map <C-TAB> :tabnext<CR>
-" map <C-S-TAB> :tabprevious<CR>
+map <C-TAB> <C-W>l <CR>
+map <C-S-TAB> <C-W>j <CR>
+" map <C-S-W> :bdelete<CR>
 
 " map <leader>tf :tabfirst<CR>
 " map <leader>tm :tabmove<CR>
 " map <leader>tl :tablast<CR>
 
 
-""" Plugins -------------------------------------------------------------------
-
-" Install vim-plug if it's not already
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
-
-call plug#begin('~/.vim/plugged')
-
-" Install any uninstalled plugins
-if !empty(filter(copy(g:plugs), '!isdirectory(v:val.dir)'))
-  autocmd VimEnter * PlugInstall | q
-endif
-
-Plug 'tpope/vim-sensible'
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-Plug 'vim-airline/vim-airline'
-Plug 'catppuccin/vim', { 'as': 'catppuccin' }
-Plug 'scrooloose/nerdcommenter'
-Plug 'nathanaelkane/vim-indent-guides'
-Plug 'easymotion/vim-easymotion'
-Plug 'bagrat/vim-buffet'
-Plug 'ryanoasis/vim-devicons'
-" Plug 'tmux-plugins/vim-tmux-focus-events'
-Plug 'christoomey/vim-tmux-navigator'
-
-" Initialize plugin system
-call plug#end()
-
-
-" TmuxNavigator
-let g:tmux_navigator_no_mappings = 1
-let g:tmux_navigator_save_on_switch = 2
-nnoremap <C-h> :TmuxNavigateLeft<CR>
-" Mapping for virtual machine settings
-" nnoremap <C-BS> <C-w>h
-nnoremap <C-l> :TmuxNavigateRight<CR>
-nnoremap <C-j> :TmuxNavigateDown<CR>
-nnoremap <C-k> :TmuxNavigateLeft<CR>
-
-""" File tree navigation ------------------------------------------------------
-
-noremap \ :NERDTreeToggle<CR>
-
-
-""" Catppuccin theme ----------------------------------------------------------
-
-set termguicolors
-colors catppuccin_mocha
-let g:airline_theme = 'catppuccin_mocha'
-" let g:airline#extensions#branch#enabled     = 1
-" let g:airline#extensions#bufferline#enabled = 1
-" let g:airline#extensions#capslock#enabled   = 1
-" let g:airline#extensions#hunks#enabled      = 1
-let g:airline#extensions#tabline#enabled    = 1
-let g:airline#extensions#tabline#show_tabs    = 1
-" let g:airline#extensions#tabline#fnamemod   = ':t' " Only show filename.
-" let g:airline#extensions#undotree#enabled   = 1
-
 """ Search --------------------------------------------------------------------
 noremap <leader>fw /\v
 noremap <leader>fr :%s/\<<C-r><C-w>\>/
 
+""" Plugins -------------------------------------------------------------------
+" util func to source relative
+function! SourceLocal(relativePath)
+  let root = expand('<sfile>:p:h')
+  let fullPath = root . '/'. a:relativePath
+  if filereadable(fullPath)
+    exec 'source' . fullPath
+  endif
+endfunction
 
-
-
-
-
+call SourceLocal (".vimrc-plug")

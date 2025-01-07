@@ -1,0 +1,29 @@
+
+""" Backup and swap directories -----------------------------------------------
+silent !mkdir ~/.vim > /dev/null 2>&1
+silent !mkdir ~/.vim/backup > /dev/null 2>&1
+silent !mkdir ~/.vim/swp > /dev/null 2>&1
+
+
+""" Vim defaults --------------------------------------------------------------
+set backupdir=~/.vim/backup//
+set directory=~/.vim/swp//
+
+
+""" Config --------------------------------------------------------------------
+noremap <leader>sc :edit ~/.vimrc<CR>
+noremap <leader>ss :source ~/.vimrc<CR>
+
+""" Cursor --------------------------------------------------------------------
+if has("autocmd")
+  au VimEnter,InsertLeave * silent execute '!echo -ne "\e[2 q"' | redraw!
+  au InsertEnter,InsertChange *
+\ if v:insertmode == 'i' | 
+\   silent execute '!echo -ne "\e[6 q"' | redraw! |
+\ elseif v:insertmode == 'r' |
+\   silent execute '!echo -ne "\e[4 q"' | redraw! |
+\ endif
+au VimLeave * silent execute '!echo -ne "\e[ q"' | redraw!
+endif
+
+

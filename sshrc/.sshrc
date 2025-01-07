@@ -7,7 +7,11 @@ done
 source $SSHHOME/.sshrc.d/sh/exports.sh
 source $SSHHOME/.sshrc.d/sh/path.sh
 source $SSHHOME/.sshrc.d/sh/aliases.sh
+
+
 alias "dotfiles"="cd $SSHHOME"
+
+export VIMINIT="let \$MYVIMRC='$SSHHOME/.sshrc.d/.vimrc' | source \$MYVIMRC"
 
 [[ "$(command -v prompts)" ]] && prompts
 

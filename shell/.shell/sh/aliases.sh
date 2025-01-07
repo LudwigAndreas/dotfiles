@@ -17,6 +17,8 @@ alias 7="cd -7"
 alias 8="cd -8"
 alias 9="cd -9"
 
+alias dotfiles="cd ~/dotfiles/"
+
 { gls --color -d . >/dev/null 2>&1 && ls=gls; }
 # List all files colorized in long format
 alias l="ls -lahF ${colorflag}"
@@ -24,13 +26,27 @@ alias l="ls -lahF ${colorflag}"
 # List all files colorized in long format, excluding . and ..
 alias la="ls -lAhF ${colorflag}"
 
+# List all files colorized and find case insensetive
+alias li="ls -lahF ${colorflag} | grep -i"
+
 # List only directories
 alias lsd="ls -lF ${colorflag} | grep --color=never '^d'"
+
+# List long, sort by mod date, reversed order
+alias ltr="ls ${colorflag} -l -t -r"
 
 # Always use color output for `ls`
 alias ls="command ls ${colorflag}"
 
+# Usual instructions
+alias c="clear"
+alias h="history"
+
+# Copy with list copied files and prompt before overwriting an existing file
+alias cp="cp -iv"
+
 # Alias for directory creation
+mkdir="mkdir -pv"
 md="mkdir -p"
 
 # Alias for directory deleting
@@ -78,3 +94,7 @@ alias reload="exec ${SHELL} -l"
 
 # Print each PATH entry on a separate line
 alias path='echo -e ${PATH//:/\\n}'
+
+alias diskspace_report="df -P -kHl"
+
+

@@ -15,7 +15,7 @@ if !empty(filter(copy(g:plugs), '!isdirectory(v:val.dir)'))
 endif
 
 Plug 'tpope/vim-sensible'
-" Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'vim-airline/vim-airline'
 Plug 'catppuccin/vim', { 'as': 'catppuccin' }
 Plug 'scrooloose/nerdcommenter'

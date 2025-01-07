@@ -59,18 +59,21 @@ dotfiles
 │       │   ├─ aliases.sh       # Base aliases 
 │       │   ├─ exports.sh       # Base exports
 │       │   ├─ path.sh          # Base path extention
+│       │   ├─ local.sh         # Local configuration (optional)
 │       │   └─ functions/       # Base functions
 │       ├── bash/               # Directory for bash configuration scripts
 │       │   ├─ index.sh         # Index file for loading all config files
 │       │   ├─ aliases.sh       # Bash extended aliases 
 │       │   ├─ exports.sh       # Bash extended exports
 │       │   ├─ path.sh          # Bash extended path extention
+│       │   ├─ local.sh         # Local configuration (optional)
 │       │   └─ functions/       # Bash extended functions
 │       └── zsh/                # Directory for zsh configuration scripts
 │           ├─ index.sh         # Index file for loading all config files
 │           ├─ aliases.sh       # Zsh extended aliases 
 │           ├─ exports.sh       # Zsh extended exports
 │           ├─ path.sh          # Zsh extended path extention
+│           ├─ local.sh         # Local configuration (optional)
 │           └─ functions/       # Zsh extended functions
 ├── sshrc/                      # Sshrc configuration 
 │   ├── bin/sshrc               # Sshrc executable

@@ -97,42 +97,4 @@ function targz() {
 	echo "${tmpFile}.gz ($((zippedSize / 1000)) kB) created successfully.";
 }
 
-# Linux specific aliases, work on both MacOS and Linux.
-pbcopy() {
-	stdin=$(</dev/stdin);
-	pbcopy="$(which pbcopy)";
-	if [[ -n "$pbcopy" ]]; then
-		echo "$stdin" | "$pbcopy"
-	else
-		echo "$stdin" | xclip -selection clipboard
-	fi
-}
-
-pbpaste() {
-	pbpaste="$(which pbpaste)";
-	if [[ -n "$pbpaste" ]]; then
-		"$pbpaste"
-	else
-		xclip -selection clipboard
-	fi
-}
-
-# Function to send periodic keep-alive signals
-afk() {
-    local interval="${1:-30}"
-
-    echo "AFK mode activated. Sending keep-alive signals every ${interval} seconds. Press Ctrl+C to stop."
-
-    while true; do
-        # Send a keep-alive signal. This could be:
-        # - A simple key press simulation
-        # - Sending a character to an SSH session
-        # - Or simply outputting to keep a terminal session active
-        echo -n " " > /dev/null
-
-        # Wait for the specified interval
-        sleep "$interval"
-    done
-}
-
 

@@ -90,3 +90,5 @@ dotfiles
 - (ThePrimagen Dotfiles)[https://github.com/ThePrimeagen/.dotfiles]
 - (Куда войти Dotfiles)[https://github.com/IlyasYOY/dotfiles]
 - (Raycast scripts)[https://github.com/raycast/script-commands/tree/master/commands#browsing]
+## Useful tools
+- (SDK Installer)[https://sdkman.io/]

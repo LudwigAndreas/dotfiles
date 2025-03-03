@@ -97,10 +97,4 @@ alias path='echo -e ${PATH//:/\\n}'
 
 alias diskspace_report="df -P -kHl"
 
-alias k="kubectl"
-# alias kns="kubectl config set-context --current --namespace"
-alias kgp="kubectl get pods"
-alias kdp="kubectl describe pods"
-alias kapply="kubectl apply -f"
-
 

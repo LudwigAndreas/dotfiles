@@ -33,6 +33,7 @@ set tabstop=2
 set title
 set ttyfast
 set visualbell
+set breakindent
 set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png,*.ico
 set wildignore+=*.pdf,*.psd
 set wildignore+=*.swp,*.bak,*.pyc,*.class
@@ -40,6 +41,8 @@ set wildignore+=node_modules/*,bower_components/*
 set scrolloff=8 
 set sidescrolloff=8
 set wrap
+set updatetime=250
+set completeopt=menuone,noselect
 
 
 """ Map leader to space -------------------------------------------------------
@@ -84,6 +87,9 @@ nnoremap <C-l> <C-w>l
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 
+nnoremap <S-E> $
+nnoremap <S-B> ^
+
 nnoremap <C-D> <C-d>
 nnoremap <C-U> <C-u>
 
@@ -101,13 +107,12 @@ noremap <C-W> :wq<CR>
 
 
 """ Tab/Window/Buffer/Split navigation ----------------------------------------
-map <C-TAB> <C-W>l <CR>
-map <C-S-TAB> <C-W>j <CR>
-" map <C-S-W> :bdelete<CR>
 
-" map <leader>tf :tabfirst<CR>
-" map <leader>tm :tabmove<CR>
-" map <leader>tl :tablast<CR>
+map <leader>tk :blast<CR>
+map <leader>tj :bfirst<CR>
+map <leader>th :bprev<CR>
+map <leader>tl :bnext<CR>
+map <leader>td :bdelete<CR>
 
 
 """ Search --------------------------------------------------------------------

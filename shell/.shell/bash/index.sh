@@ -4,6 +4,7 @@ for function in ~/.shell/bash/functions/*; do
     source $function
 done
 
+
 source $HOME/.shell/bash/exports.sh
 source $HOME/.shell/bash/path.sh
 source $HOME/.shell/bash/aliases.sh

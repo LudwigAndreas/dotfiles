@@ -101,7 +101,6 @@ vim.g.have_nerd_font = true
 -- Make line numbers default
 vim.opt.number = true
 
-vim.cmd [[colorscheme catppuccin-mocha]]
 -- You can also add relative line numbers, to help with jumping.
 --  Experiment for yourself to see if you like it!
 -- vim.opt.relativenumber = true
@@ -826,7 +825,12 @@ require('lazy').setup({
     end,
   },
 
-  { 'catppuccin/nvim', name = 'catppuccin', priority = 1000 },
+  { 'catppuccin/nvim', name = 'catppuccin', priority = 1000, 
+ config = function()
+
+ vim.cmd [[colorscheme catppuccin-mocha]]
+end,
+},
 
   -- Highlight todo, notes, etc in comments
   -- Highlight todo, notes, etc in comments

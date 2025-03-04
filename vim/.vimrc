@@ -25,11 +25,14 @@ set ignorecase
 set list
 set shiftround
 set shiftwidth=4
+set autoindent
+set smartindent
+set expandtab
 set showcmd
 set showmatch
 set splitbelow
 set splitright
-set tabstop=2
+set tabstop=4
 set title
 set ttyfast
 set visualbell

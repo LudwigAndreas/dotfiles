@@ -11,7 +11,4 @@ keybind = global:cmd+/=toggle_quick_terminal
 macos-option-as-alt = true
 # background-opacity = 0.7
 # background-blur-radius = 20 
-command=~/.config/tmux/start-session.sh
-
-
-
+command=~/.config/ghostty/start-session.sh

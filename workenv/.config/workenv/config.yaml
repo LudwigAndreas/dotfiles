@@ -13,7 +13,6 @@ actions:
 env:
   WORKENV_ACTIVE: 'true'
 projects:
-
   example:
     actions:
     - name: cd
@@ -26,9 +25,10 @@ projects:
       PROJECT_ROOT: $project.path
     path: ~/Projects/SimpleMLP
 
-  test:
+  start:
     actions:
-      - name: fetch_macos
+      - name: open_work
+      - name: 
 
 shell:
   init:

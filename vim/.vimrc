@@ -83,12 +83,6 @@ nnoremap <leader>O O<Esc>
 
 
 """ Movement between splits ---------------------------------------------------
-nnoremap <C-h> <C-w>h
-" Mapping for virtual machine settings
-" nnoremap <C-BS> <C-w>h
-nnoremap <C-l> <C-w>l
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
 
 nnoremap <S-E> $
 nnoremap <S-B> ^
@@ -97,26 +91,31 @@ nnoremap <C-D> <C-d>
 nnoremap <C-U> <C-u>
 
 
-""" Tab/Window/Buffer/Split actions -------------------------------------------
-map <leader>wv :vsplit<CR>
-map <leader>wh :split<CR>
-map <leader>wml <C-W>L
-map <leader>wmj <C-W>J
-map <leader>wmk <C-W>K
-map <leader>wmh <C-W>H
-map gn :bnext<CR>
-map gp :bprevious<CR>
-noremap <C-W> :wq<CR>
+""" Buffer management ---------------------------------------------------------
+nnoremap <leader>bn :bnext<CR>
+nnoremap <leader>bp :bprev<CR>
+nnoremap <leader>bd :bdelete<CR>
+nnoremap <leader>bl :ls<CR>
+nnoremap <leader>bb :buffer<CR>
 
+""" Window management ---------------------------------------------------------
+nnoremap <leader>sv :vsplit<CR>
+nnoremap <leader>sh :split<CR>
+" Mapping for virtual machine settings
+" nnoremap <C-BS> <C-w>h
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <leader>wq <C-w>q
+nnoremap <leader>wo <C-w>o
 
-""" Tab/Window/Buffer/Split navigation ----------------------------------------
-
-map <leader>tk :blast<CR>
-map <leader>tj :bfirst<CR>
-map <leader>th :bprev<CR>
-map <leader>tl :bnext<CR>
-map <leader>td :bdelete<CR>
-
+""" Tab management ------------------------------------------------------------
+nnoremap <leader>tn :tabnew<CR>
+nnoremap <leader>tc :tabclose<CR>
+nnoremap <leader>to :tabonly<CR>
+nnoremap <leader>tp :tabprevious<CR>
+nnoremap <leader>tn :tabnext<CR>
 
 """ Search --------------------------------------------------------------------
 noremap <leader>fw /\v

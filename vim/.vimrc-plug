@@ -38,7 +38,7 @@ nnoremap <C-h> :TmuxNavigateLeft<CR>
 " nnoremap <C-BS> <C-w>h
 nnoremap <C-l> :TmuxNavigateRight<CR>
 nnoremap <C-j> :TmuxNavigateDown<CR>
-nnoremap <C-k> :TmuxNavigateLeft<CR>
+nnoremap <C-k> :TmuxNavigateUp<CR>
 
 """ File tree navigation ------------------------------------------------------
 

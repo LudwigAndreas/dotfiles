@@ -1,0 +1,185 @@
+""" Map leader to space -------------------------------------------
+let mapleader = " "
+
+""" Vim configuration -------------------------------------------
+" source ~/.vimrc
+
+set relativenumber
+set nu
+set clipboard^=unnamed,unnamedplus
+set matchpairs+=<:>
+set hlsearch
+" disable highlight after escape
+nnoremap <Esc> :nohlsearch<CR>
+set ignorecase
+set smartcase
+set incsearch
+set wrapscan
+set gdefault
+set history=10000
+set scrolloff=8 sidescrolloff=8
+
+""" Vim mappings -------------------------------------------
+" map black whole register
+noremap \ "_
+" paste over without overwriting default register
+xnoremap p P
+
+" move to the beginning of the next word
+map w [w
+" move to the end of the next word
+map e ]w
+" move to the beginning of the previous word
+map b [b
+" move to the end of the previous word
+map ge ]b
+" add new line without entering edit mode
+nnoremap <leader>o o<Esc>
+nnoremap <leader>O O<Esc>
+
+
+""" Movement between splits -------------------------------------------
+nnoremap <C-h> <C-w>h
+" Mapping for virtual machine settings
+nnoremap <C-BS> <C-w>h
+nnoremap <C-l> <C-w>l
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+
+nnoremap <C-D> <C-d>
+nnoremap <C-U> <C-u>
+
+
+""" Tab/Window/Buffer/Split navigation ------------------------------------------
+map <C-TAB> :tabnext<CR>
+map <C-S-TAB> :tabprevious<CR>
+
+map <leader>tf :tabfirst<CR>
+map <leader>tm :tabmove<CR>
+map <leader>tl :tablast<CR>
+
+
+""" IdeaVim configuration -------------------------------------------
+set ideajoin
+set idearefactormode=keep
+set ideastatusicon=enabled
+
+
+""" Plugins -------------------------------------------
+set nerdtree
+set highlightedyank
+set commentary
+set easymotion
+set surround
+set multiple-cursors
+
+
+""" File tree navigation -------------------------------------------
+noremap \ :NERDTree<CR>
+
+
+
+nnoremap <leader>cc :e ~/.ideavimrc<CR>
+nnoremap <leader>cs :action IdeaVim.ReloadVimRc.reload<CR>
+
+
+""" Search -------------------------------------------
+noremap <leader>fc :action GotoClass<CR>
+noremap <leader>ff :action GotoFile<CR>
+noremap <leader>fs :action GotoSymbol<CR>
+noremap <leader>fk :action GotoAction<CR>
+noremap <leader>fa :action SearchEverywhere<CR>
+noremap <leader>fg :action FindInPath<CR>
+noremap <leader>fw :action FindWordAtCaret<CR>
+noremap <leader>fr :action Replace<CR>
+nnoremap <leader>f/ :action RecentFiles<CR>
+nnoremap <leader>f. :action SelectInProjectView<CR>
+" Find and replace word under cursor (ideavim adaptation)
+noremap <leader>fvr viwy \| :%s/\<<C-r>+\>/<C-r><C-w>/gI<Left><Left><Left>
+"vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+
+
+""" Run -------------------------------------------
+noremap <leader>rr :action Run<CR>
+noremap <leader>rd :action Debug<CR>
+noremap <leader>ra :action RunAnything<CR>
+noremap <leader>rm :action Maven.ExecuteGoal<CR>
+noremap <leader>rc :action ChooseRunConfiguration<CR>
+
+
+""" Toggle -------------------------------------------
+noremap <leader><leader> :action CodeCompletion<CR>
+noremap <leader>q :action ShowIntentionActions<CR>
+noremap <leader>tp :action TogglePresentationMode<CR>
+noremap <leader>td :action ToggleDistractionFreeMode<CR>
+noremap <leader>tq :action ActivateProblemsViewToolWindow<CR>
+noremap <leader>ta :action Annotate<CR>
+noremap <leader>tg :action Vcs.QuickListPopupAction<CR>
+noremap <leader>tr :action ChooseRunConfiguration<CR>
+
+" noremap <leader>td :action QuickTypeDefinition<CR>
+" noremap <leader>ti :action ExpressionTypeInfo<CR>
+" noremap <leader>tt :action ShowHoverInfo<CR>
+" noremap <leader>th :action QuickTypeHierarchy<CR>
+
+
+""" Goto actions -------------------------------------------
+map [d :action GotoPreviousError<CR>
+map ]d :action GotoNextError<CR>
+map g[ :action PreviousOccurence<CR>
+map g] :action NextOccurence<CR>
+
+nnoremap gd :action GotoDeclaration<CR>
+nnoremap gy :action GotoTypeDeclaration<CR>
+nnoremap gD :action GotoSuperMethod<CR>
+nnoremap gI :action GotoImplementation<CR>
+nnoremap gu :action ShowUsages<CR>
+nnoremap gf :action GotoFileUnderCaret<CR>
+nnoremap gx :action RevealIn<CR>
+nnoremap gl :action GotoLine<CR>
+nnoremap gs :action ViewSource<CR>
+nnoremap go :action FileStructurePopup<CR>
+
+
+""" Generating -------------------------------------------
+nnoremap <leader>gg :action Generate<CR>
+nnoremap <leader>gtm :action GenerateTestMethod<CR>
+nnoremap <leader>gt :action GotoTest<CR>
+
+
+""" Code actions -------------------------------------------
+
+imap <C-n> <ESC>:action HippieCompletion<CR>
+imap <C-p> <ESC>:action HippieBackwardCompletion<CR>
+
+map <leader>oi :action OptimizeImports
+map <leader>oc :action ReformatCode
+map <leader>oa :action ReformatCode<CR>:action OptimizeImports<CR>
+
+map <leader>jev :action IntroduceVariable
+map <leader>jec :action IntroduceConstant
+map <leader>jem :action ExtractMethod
+
+map K :action QuickJavaDoc<CR>
+map <C-s> :action ParameterInfo<CR>
+imap <C-s> :action ParameterInfo<CR>
+map <leader>a :action ShowIntentionActions<CR>
+
+
+""" Tab/Window/Buffer/Split actions -------------------------------------------
+map <leader>wv :action SplitVertically<CR>
+map <leader>wh :action SplitHorizontally<CR>
+map <leader>wr :action MoveTabRight<CR>
+map <leader>wl :action MoveTabLeft<CR>
+map <leader>wm :action MoveEditorToOppositeTabGroup<CR>
+map <leader>ww :action Unsplit<CR>
+map <leader>wa :action UnsplitAll<CR>
+map <C-W> :action CloseContent<CR>
+map <C-S-W> :action CloseAllEditors<CR>
+
+
+""" Tools shortcuts -------------------------------------------
+map <C-e> :action EditSourceInNewWindow<CR>
+nnoremap <C-t> :action ActivateTerminalToolWindow<CR>
+
+

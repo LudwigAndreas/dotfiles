@@ -1,0 +1,35 @@
+actions:
+  cd:
+  - exec: cd $project_path
+  ls:
+  - exec: ls
+  git_fetch:
+  - exec: git fetch --all
+  open:
+  - exec: $EDITOR ${args[@]}
+  fetch_macos:
+  - exec: ~/dotfiles/scripts/fetch_macos.sh
+  
+env:
+  WORKENV_ACTIVE: 'true'
+projects:
+  example:
+    actions:
+    - name: cd
+    - name: test
+    - name: ls
+    - name: git_fetch
+    - args: code
+      name: open
+    env:
+      PROJECT_ROOT: $project.path
+    path: ~/Projects/SimpleMLP
+
+  start:
+    actions:
+      - name: open_work
+      - name: 
+
+shell:
+  init:
+  - source $WORKENV_CONFIG_PATH/shell/init.sh

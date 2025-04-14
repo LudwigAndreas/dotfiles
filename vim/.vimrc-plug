@@ -1,0 +1,60 @@
+""" Plugins -------------------------------------------------------------------
+
+" Install vim-plug if it's not already
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+call plug#begin('~/.vim/plugged')
+
+" Install any uninstalled plugins
+if !empty(filter(copy(g:plugs), '!isdirectory(v:val.dir)'))
+  autocmd VimEnter * PlugInstall | q
+endif
+
+Plug 'tpope/vim-sensible'
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'vim-airline/vim-airline'
+Plug 'catppuccin/vim', { 'as': 'catppuccin' }
+Plug 'scrooloose/nerdcommenter'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'easymotion/vim-easymotion'
+Plug 'bagrat/vim-buffet'
+Plug 'ryanoasis/vim-devicons'
+Plug 'tmux-plugins/vim-tmux-focus-events'
+Plug 'christoomey/vim-tmux-navigator'
+
+" Initialize plugin system
+call plug#end()
+
+
+" TmuxNavigator
+let g:tmux_navigator_no_mappings = 1
+let g:tmux_navigator_save_on_switch = 2
+nnoremap <C-h> :TmuxNavigateLeft<CR>
+" Mapping for virtual machine settings
+" nnoremap <C-BS> <C-w>h
+nnoremap <C-l> :TmuxNavigateRight<CR>
+nnoremap <C-j> :TmuxNavigateDown<CR>
+nnoremap <C-k> :TmuxNavigateUp<CR>
+
+""" File tree navigation ------------------------------------------------------
+
+noremap \ :NERDTreeToggle<CR>
+
+
+""" Catppuccin theme ----------------------------------------------------------
+
+set termguicolors
+colors catppuccin_mocha
+let g:airline_theme = 'catppuccin_mocha'
+" let g:airline#extensions#branch#enabled     = 1
+" let g:airline#extensions#bufferline#enabled = 1
+" let g:airline#extensions#capslock#enabled   = 1
+" let g:airline#extensions#hunks#enabled      = 1
+let g:airline#extensions#tabline#enabled    = 1
+let g:airline#extensions#tabline#show_tabs    = 1
+" let g:airline#extensions#tabline#fnamemod   = ':t' " Only show filename.
+" let g:airline#extensions#undotree#enabled   = 1

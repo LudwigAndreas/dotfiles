@@ -1,0 +1,31 @@
+# vim: filetype=sh :
+
+for function in $SSHHOME/.sshrc.d/sh/functions/*; do
+    source $function
+done
+
+source $SSHHOME/.sshrc.d/sh/exports.sh
+source $SSHHOME/.sshrc.d/sh/path.sh
+source $SSHHOME/.sshrc.d/sh/aliases.sh
+
+
+alias "dotfiles"="cd $SSHHOME"
+
+export VIMINIT="let \$MYVIMRC='$SSHHOME/.sshrc.d/.vimrc' | source \$MYVIMRC"
+
+[[ "$(command -v prompts)" ]] && prompts
+
+# if [[ "$(command -v tmux)" ]]; then
+#   tmuxrc() {
+#     local TMUXDIR=/tmp/.$(whoami)-tmux-server
+#     if ! [ -d $TMUXDIR ]; then
+#       rm -rf $TMUXDIR
+#       mkdir -m 700 $TMUXDIR
+#     fi
+#     rm -rf $TMUXDIR/.sshrc.d
+#     cp -r "$SSHHOME/.sshrc" "$SSHHOME/bashsshrc" "$SSHHOME/sshrc" "$SSHHOME/.sshrc.d" "$TMUXDIR"
+#     SSHHOME="$TMUXDIR" SHELL="$TMUXDIR/bashsshrc" /usr/bin/tmux -S "$TMUXDIR/tmuxserver" -f "$TMUXDIR/.sshrc.d/.tmux.conf" "$@"
+#   }
+#   export SHELL=$(which bash)
+#   alias tmux=tmuxrc
+# fi

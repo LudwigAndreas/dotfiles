@@ -1,0 +1,133 @@
+// Place your key bindings in this file to override the defaultsa
+[
+  {
+    "key": "\\",
+    "command": "workbench.view.explorer",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+tab",
+    "command": "workbench.action.nextEditorInGroup"
+  },
+  {
+    "key": "ctrl+shift+tab",
+    "command": "workbench.action.previousEditorInGroup"
+  },
+  {
+    "key": "ctrl+k",
+    "command": "workbench.action.navigateUp"
+  },
+  {
+    "key": "ctrl+j",
+    "command": "workbench.action.navigateDown"
+  },
+  {
+    "key": "ctrl+h",
+    "command": "workbench.action.navigateLeft"
+  },
+  // Mapping for virtual machine settings
+  // {
+  //   "key": "ctrl+backspace",
+  //   "command": "workbench.action.navigateLeft"
+  // },
+  {
+    "key": "ctrl+l",
+    "command": "workbench.action.navigateRight"
+  },
+  {
+    "key": "ctrl+h",
+    "when": "panelFocus",
+    "command": "workbench.action.previousPanelView"
+  },
+  // Mapping for virtual machine settings
+  // {
+  //   "key": "ctrl+backspace",
+  //   "command": "workbench.action.previousPanelView"
+  // },
+  {
+    "key": "ctrl+l",
+    "when": "panelFocus",
+    "command": "workbench.action.nextPanelView"
+  },
+  {
+    "key": "ctrl+k",
+    "when": "sideBarFocus && explorerViewletVisible",
+    "command": "workbench.files.action.focusOpenEditorsView"
+  },
+  {
+    "key": "ctrl+j",
+    "when": "sideBarFocus && explorerViewletVisible && !filesExplorerFocus",
+    "command": "workbench.files.action.focusFilesExplorer"
+  },
+  {
+    "key": "ctrl+w",
+    "when": "panelFocus",
+    "command": "workbench.action.closePanel"
+  },
+  {
+    "key": "cmd+w",
+    "when": "panelFocus",
+    "command": "workbench.action.closePanel"
+  },
+  // Sidebar Nerdtree-like configuration
+  {
+    "key": "escape",
+    "when": "sideBarFocus && explorerViewletVisible",
+    "command": "workbench.action.focusLastEditorGroup"
+  },
+  {
+    "key": "q",
+    "when": "sideBarFocus && explorerViewletVisible",
+    "command": "workbench.action.closeSidebar"
+  },
+  {
+    "key": "n",
+    "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus",
+    "command": "explorer.newFile"
+  },
+  {
+    "key": "shift+n",
+    "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus",
+    "command": "explorer.newFolder"
+  },
+  {
+    "key": "r",
+    "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus",
+    "command": "renameFile"
+  },
+  {
+    "key": "x",
+    "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus",
+    "command": "filesExplorer.cut"
+  },
+  {
+    "key": "y",
+    "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus",
+    "command": "filesExplorer.copy"
+  },
+  {
+    "key": "p",
+    "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus",
+    "command": "filesExplorer.paste"
+  },
+  {
+    "key": "d",
+    "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus",
+    "command": "deleteFile"
+  },
+  {
+    "key": "u",
+    "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus",
+    "command": "undo"
+  },
+  {
+    "key": "ctrl+r",
+    "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus",
+    "command": "redo"
+  },
+// ----- Tools shortcuts -----
+  {
+    "key": "ctrl+t",
+    "command": "workbench.action.terminal.focus"
+  },
+]

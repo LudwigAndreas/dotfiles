@@ -4,6 +4,7 @@ export EDITOR=$VISUAL;
 export SSH_KEY_PATH="$HOME/.ssh/id_rsa"
 export KEYTIMEOUT=1
 export NVM_DIR="$HOME/.nvm"
+export TERM="xterm-256color"
 
 # Detect which `ls` flavor is in use
 { ls --version >/dev/null 2>&1; } ||

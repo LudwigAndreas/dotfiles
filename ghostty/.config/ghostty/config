@@ -1,6 +1,7 @@
 font-family = JetBrainsMono Nerd Font Mono
 
 font-size = 19
+# theme = builtin tango light
 theme = catppuccin-macchiato
 shell-integration-features = no-cursor, sudo, no-title
 cursor-style = block

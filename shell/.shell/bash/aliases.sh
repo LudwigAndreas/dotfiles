@@ -26,10 +26,10 @@ alias gr='git remote'
 
 # Docker
 alias dco="docker compose"
-alias dps"docker ps"
+alias dps="docker ps"
 alias dpa="docker pa -a"
 alias dl="docker ps -l -q"
-alias dx"docker exec -it"
+alias dx="docker exec -it"
 
 # K8s
 alias k="kubectl"
@@ -46,44 +46,40 @@ alias kl="kubectl logs -f"
 alias ke="kubectl exec -it"
 alias kcns='kubectl config set-context --current --namespace'
 
-case "$(uname -s)" in
-    Linux)
-        if command -v xclip > /dev/null 2>&1; then
-            alias pbpaste='xclip -selection clipboard - o'
-        elif command -v xsel > /dev/null 2>&1; then
-            alias pbpaste='xsel --clipboard --output'
-        else
-            echo "Warning: Neither 'xclip' or 'xsel' is installed."
-        fi
-        ;;
-    CYGWIN*|MINGW*|MSYS*)
-        if command -v powershell.exe > /dev/null 2>&1; then
-            alias pbpaste="powershell.exe -Command Get-Clipboard"
-        else
-            echo "Error windows does not support pasting clipboard with command"
-        fi
-        ;;
-    *)
-        ;;
-esac
+if ! command -v pbpaste > /dev/null 2>&1; then
+    case "$(uname -s)" in
+        Linux)
+            if command -v xclip > /dev/null 2>&1; then
+                alias pbpaste='xclip -selection clipboard - o'
+            elif command -v xsel > /dev/null 2>&1; then
+                alias pbpaste='xsel --clipboard --output'
+            fi
+            ;;
+        CYGWIN*|MINGW*|MSYS*)
+            if command -v powershell.exe > /dev/null 2>&1; then
+                alias pbpaste="powershell.exe -Command Get-Clipboard"
+            fi
+            ;;
+        *)
+            ;;
+    esac
+fi
 
-case "$(uname -s)" in
-    Linux)
-        if command -v xclip > /dev/null 2>&1; then
-            alias pbopy='xclip -selection clipboard'
-        elif command -v xsel > /dev/null 2>&1; then
-            alias pbcopy='xsel --clipboard --input'
-        else
-            echo "Warning: Neither 'xclip' or 'xsel' is installed."
-        fi
-        ;;
-    CYGWIN*|MINGW*|MSYS*)
-        if command -v clip > /dev/null 2>&1; then
-            alias pbcopy='clip'
-        else
-            echo "Error: 'clip' command not found."
-        fi
-        ;;
-    *)
-        ;;
-esac
+if ! command -v pbcopy > /dev/null 2>&1; then
+    case "$(uname -s)" in
+        Linux)
+            if command -v xclip > /dev/null 2>&1; then
+                alias pbcopy='xclip -selection clipboard'
+            elif command -v xsel > /dev/null 2>&1; then
+                alias pbcopy='xsel --clipboard --input'
+            fi
+            ;;
+        CYGWIN*|MINGW*|MSYS*)
+            if command -v clip > /dev/null 2>&1; then
+                alias pbcopy='clip'
+            fi
+            ;;
+        *)
+            ;;
+    esac
+fi

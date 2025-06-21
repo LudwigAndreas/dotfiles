@@ -156,10 +156,9 @@ if !has('gui_running')
 endif
 " enable true colors support
 set termguicolors
-" colorscheme slate
+colorscheme slate
 " colorscheme desert
 " colorscheme lunaperche
-colorscheme catppuccin_mocha
 
 """ Plugins -------------------------------------------------------------------
 " util func to source relative

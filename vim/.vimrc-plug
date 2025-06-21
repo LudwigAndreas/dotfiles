@@ -49,6 +49,7 @@ noremap \ :NERDTreeToggle<CR>
 
 set termguicolors
 colors catppuccin_mocha
+colorscheme catppuccin_mocha
 let g:airline_theme = 'catppuccin_mocha'
 " let g:airline#extensions#branch#enabled     = 1
 " let g:airline#extensions#bufferline#enabled = 1

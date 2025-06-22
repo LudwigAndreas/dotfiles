@@ -1,1 +1,1 @@
-export PS1='$(whoami)@$(hostname):$(pwd) \$'
+export PS1='$(whoami)@$(hostname):$(basename $(pwd)) \$ '

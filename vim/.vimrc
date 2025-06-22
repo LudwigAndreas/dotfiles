@@ -3,6 +3,7 @@
 """ Vim defaults --------------------------------------------------------------
 syntax on 
 filetype plugin on
+filetype plugin indent on
 
 set encoding=utf-8
 " highlight current line
@@ -26,7 +27,7 @@ set modelines=0
 set list
 
 " use system clipboard
-set clipboard^=unnamed,unnamedplus
+set clipboard=unnamedplus
 
 " enable line numbers
 set nu
@@ -50,11 +51,10 @@ set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set textwidth=79
-set expandtab
 set autoindent
+set expandtab
 
 set shiftround
-set expandtab
 set smartindent
 set showcmd
 set splitbelow

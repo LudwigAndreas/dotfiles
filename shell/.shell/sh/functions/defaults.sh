@@ -1,11 +1,11 @@
 
 # Create a new directory and enter it
-function mkd() {
+mkd() {
 	mkdir -p "$@" && cd "$_";
 }
 
 # Determine size of a file or total size of a directory
-function fs() {
+fs() {
 	if du -b /dev/null > /dev/null 2>&1; then
 		local arg=-sbh;
 	else
@@ -19,7 +19,7 @@ function fs() {
 }
 
 # Run `up 3` for 3 folders up
-function up() {
+up() {
 	local counter=${1:-1}
 	local dirup="../"
 	local out=""
@@ -31,7 +31,7 @@ function up() {
 	cd $out
 }
 
-function fname() {
+fname() {
 	find . -iname "*$@"
 }
 
@@ -47,21 +47,21 @@ s() {
           #    └─ Don't clear the screen after quitting less.
 }
 
-function logc() {
+logc() {
 	tail -150 $1 | more
 }
 
-function logf() {
+logf() {
 	tail -f $1
 }
 
 # Usage: `json '{"foo":42}'` or `echo '{"foo":42}' | json`
-function json() {
-	if [ -t 0 ]; then # argument
-		python -mjson.tool <<< "$*"
-	else # pipe
-		python -mjson.tool
-	fi
+json() {
+    if [ -t 0 ]; then
+        printf "%s\n" "$*" | python -mjson.tool
+    else
+        python -mjson.tool
+    fi
 }
 
 # Function to send periodic keep-alive signals

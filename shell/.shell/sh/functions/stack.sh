@@ -1,11 +1,6 @@
-# Fast switch k8s namespace
-function kswitch() {
-  kubectl config set-context --current --namespace=$1
-}
-
 # Fast port-forward to a pod
-# Usage: kport <pod-name (might be part of name)> <local-port> [remote-port]
-function kport() {
+# Usage: kport <pod-name> <local-port> [remote-port]
+kport() {
     local pod=$(kubectl get pods | grep $1 | awk '{print $1}')
     
     if [ -z "$3" ]; then
@@ -19,15 +14,15 @@ function kport() {
 
 # Logs for container
 # Usage: klogs <pod-name (might be part of name)>
-function klogs() {
-	local pod=$(kubectl get pods | grep $1 | awk '{print $1}')
-	kubectl logs $pod --tail=100 -f
+klogs() {
+    local pod=$(kubectl get pods | grep $1 | awk '{print $1}')
+    kubectl logs $pod --tail=100 -f 
 }
 
 # Search in logs
-# Usage: klogsearch <pod-name (might be part of name)> <search-term>
-function klogsearch() {
-	local pod=$(kubectl get pods | grep $1 | awk '{print $1}')
-	kubectl logs $pod | grep $2
+# Usage: klogsearch <pod-name> <search-term>
+klogsearch() {
+    local pod=$(kubectl get pods | grep $1 | awk '{print $1}')
+    kubectl logs $pod | grep $2
 }
 

@@ -1,5 +1,3 @@
-### history stuff ###
-
 # keep history up to date, across sessions, in realtime
 #  http://unix.stackexchange.com/a/48113
 export HISTCONTROL="erasedups:ignoreboth" # no duplicate entries

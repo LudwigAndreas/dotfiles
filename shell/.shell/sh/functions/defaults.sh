@@ -1,45 +1,94 @@
-
+#######################################
+# Reloads current shell
+# Arguments:
+#   None
+#######################################
 reload() {
     shell="$(ps -p $$ -o args= | awk '{print $1}')"
     exec ${shell} -l
 }
 
+#######################################
 # Create a new directory and enter it
+# Arguments:
+#   directory to create
+#######################################
 mkd() {
-	mkdir -p "$@" && cd "$_";
+    mkdir -p "$@" && cd "$_";
 }
 
+#######################################
 # Determine size of a file or total size of a directory
+# Arguments:
+#   Path to file or directory
+# Outputs:
+#   Writes path size into stdout and it's filename
+# Usage: 
+# $ fs _templates/
+# 22K	_templates/
+#######################################
 fs() {
-	if du -b /dev/null > /dev/null 2>&1; then
-		local arg=-sbh;
-	else
-		local arg=-sh;
-	fi
-	if [[ -n "$@" ]]; then
-		du $arg -- "$@";
-	else
-		du $arg .[^.]* ./*;
-	fi;
+    if du -b /dev/null > /dev/null 2>&1; then
+        local arg=-sbh;
+    else
+        local arg=-sh;
+    fi
+    if [[ -n "$@" ]]; then
+        du $arg -- "$@";
+    else
+        du $arg .[^.]* ./*;
+    fi;
 }
 
-# Run `up 3` for 3 folders up
+#######################################
+# Smart cd to go to previous directory
+# Globals:
+#   - VERBOSE
+# Arguments:
+#   String to log
+# Outputs:
+#   Writes log string into stdout if $VERBOSE is set
+# Usage: 
+# $ up 3
+# go for 3 folders up
+#######################################
 up() {
-	local counter=${1:-1}
-	local dirup="../"
-	local out=""
-	while (( counter > 0 )); do
-		let counter--
-		out="${out}$dirup"
-	done
+    local counter=${1:-1}
+    local dirup="../"
+    local out=""
+    while (( counter > 0 )); do
+        let counter--
+        out="${out}$dirup"
+    done
 
-	cd $out
+    cd $out
 }
 
+#######################################
+# Find all files recursively in current directory matching paggern *arg*
+# Arguments:
+#   part of filename or filenames to find
+# Outputs:
+#   Writes find result to stdout
+# Usage: 
+#   $ fname file
+#   ./filename
+#   ./my-filename.sh
+#   ./dir/filename.py
+#######################################
 fname() {
-	find . -iname "*$@"
+    for arg in "$@"; do
+        find . -iname "*$arg*"
+    done
 }
 
+#######################################
+# Find in current directory by content and output with less
+# Arguments:
+#   stirng to find
+# Outputs:
+#   prints grep output into stdout using less
+#######################################
 s() {
     grep --color=always "$*" \
          --exclude-dir=".git" \
@@ -52,24 +101,63 @@ s() {
           #    └─ Don't clear the screen after quitting less.
 }
 
+#######################################
+# Show last 150 lies of file and allow scrolling with less
+# Arguments:
+#   filename
+# Outputs:
+#   less output 
+#######################################
 logc() {
-	tail -150 $1 | more
+    tail -150 $1 | less
 }
 
+#######################################
+# Following output file
+# Arguments:
+#   file to print
+# Outputs:
+#   prints file in follow mode using tail
+#######################################
 logf() {
-	tail -f $1
+    tail -f $1
 }
 
-# Usage: `json '{"foo":42}'` or `echo '{"foo":42}' | json`
+#######################################
+# Pretty prints json using python json.tool
+# Arguments:
+#  json content to pretty-print
+# Outputs:
+#   Writes location to stdout
+# Usage: 
+#   $ json '{"foo":42}'
+# or 
+#   $ echo '{"foo":42}' | json
+#######################################
 json() {
-    if [ -t 0 ]; then
-        printf "%s\n" "$*" | python -mjson.tool
+    if command -v python3 >/dev/null 2>&1; then
+        _python=python3
+    elif command -v python >/dev/null 2>&1; then
+        _python=python
     else
-        python -mjson.tool
+        echo "Error: python3 or python not found" >&2
+        return 1
+    fi
+
+    if [ -t 0 ]; then
+        printf "%s\n" "$*" | ${_python} -mjson.tool
+    else
+        ${_python} -mjson.tool
     fi
 }
 
+#######################################
 # Function to send periodic keep-alive signals
+# Arguments:
+#   interval (optional)
+# Outputs:
+#   echoing empty stirng infinitely
+#######################################
 afk() {
     local interval="${1:-30}"
 

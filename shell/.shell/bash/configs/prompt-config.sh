@@ -1,4 +1,15 @@
 
+#######################################
+# write symbolic info about git status for current directory
+# Globals:
+#   -
+# Arguments:
+#   TODO: fill arguments documentation
+# Outputs:
+#   Writes short symbolic git status description about currest directory
+# Example:
+#   TODO: fill example
+#######################################
 prompt_git() {
     local s='';
     local branchName='';

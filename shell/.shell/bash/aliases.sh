@@ -1,6 +1,19 @@
 # Alias for nvim
 # alias vim=nvim
 
+# Normalize `open` across Linux, macOS, and Windows.
+# This is needed to make the `o` function (see below) cross-platform.
+if ! command -v open > /dev/null 2>&1; then
+    if [ ! $(uname -s) = 'Darwin' ]; then
+        if [[ $(uname -s) == *MINGW* ]] || [grep -q Microsoft /proc/version]; then
+            # Ubuntu on Windows using the Linux subsystem
+            alias open='explorer.exe';
+        else
+            alias open='xdg-open';
+        fi
+    fi
+fi
+
 # IP addresses
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 

@@ -1,5 +1,10 @@
-
+#######################################
 # Use Git’s colored diff when available
+# Arguments:
+#   git diff input
+# Outputs:
+#   Colored diff
+#######################################
 hash git 2>/dev/null;
 if [ $? -eq 0 ]; then
     diff() {

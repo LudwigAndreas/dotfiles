@@ -2,38 +2,77 @@ cr="$(tput setaf 1)"
 cg="$(tput setaf 2)"
 cb="$(tput setaf 4)"
 cw="$(tput sgr0)"
+c0="$(tput init)"
 
-# Coloring errors
-function error {
-    printf "%s$1\n" "${cr}"
+#######################################
+# Common logging function.
+# Globals:
+#   -
+# Arguments:
+#   String to log
+# Outputs:
+#   Writes log string into stdout
+#######################################
+logi() {
+    printf "%s[*] $1%s\n" "${cw}" "${c0}"
 }
 
-# Logging functions 
-function log_info {
-    printf "%s[*] $1\n" "${cw}"
+#######################################
+# Common error logging function.
+# Globals:
+#   -
+# Arguments:
+#   Error string to log
+# Outputs:
+#   Writes error log string into stdout
+#######################################
+loge() {
+    printf "%s[-] $1%s\n" "${cr}" "${c0}"
 }
 
-function log_error {
-    printf "%s[-] $1\n" "${cr}"
+#######################################
+# Common success logging function.
+# Globals:
+#   -
+# Arguments:
+#   String to log colored green
+# Outputs:
+#   Writes log string into stdout
+#######################################
+logs() {
+    printf "%s[+] $1%s\n" "${cg}" "${c0}"
 }
 
-function log_success {
-    printf "%s[+] $1\n" "${cg}"
+#######################################
+# Common debug logging function.
+# Globals:
+#   - VERBOSE
+# Arguments:
+#   String to log
+# Outputs:
+#   Writes log string into stdout if $VERBOSE is set
+#######################################
+logd() {
+    [ -n "$VERBOSE" ] && printf "[*] %s$1%s\n" "${cw}" "${c0}"
 }
 
-function log_debug {
-    [ -n "$verbose" ] && printf "[*] %s$1\n" "${cw}"
+log() {
+  logi $1
 }
 
-function log {
-  log_info $1
-}
-
+#######################################
 # Template asking [y]es or [n]o (with case insensetive input)
-function ask_yes_no {
+# Globals:
+#   - VERBOSE
+# Arguments:
+#   String to log
+# Outputs:
+#   Writes log string into stdout if $VERBOSE is set
+#######################################
+ask_yes_no() {
     local message=$1
     [ -n "$message" ] && log $message && sleep 1
-    printf "%s[*] DO YOU WANT TO PROCEED [Y/N] : " "${cw}"
+    logi "DO YOU WANT TO PROCEED [Y/N] : "
     while true; do
         read -r install
         # Optional reassignment (only if needed case insensetive parsing)
@@ -46,7 +85,7 @@ function ask_yes_no {
                 return 1
             ;;
             *)
-                printf "%s[-] Invalid input. Please answer with 'Y[es]' or 'N[o]' [Y/N] : " "${cw}"
+                loge "Invalid input. Please answer with 'Y[es]' or 'N[o]' [Y/N] : "
                 continue
             ;;
         esac
@@ -54,7 +93,7 @@ function ask_yes_no {
 }
 
 # Tempate printing usage
-function usage {
+usage() {
     printf %s "${cw}"
     echo "Usage:	$0 [Options]"
     echo
@@ -78,7 +117,7 @@ while [[ $# -gt 0 ]]; do
       usage
       ;;
     -v|--verbose)
-      verbose=true
+      VERBOSE=true
       shift
       ;;
     -a|--action)
@@ -90,7 +129,7 @@ while [[ $# -gt 0 ]]; do
       shift 2
       ;;
     *)
-      error "Error: Unknown option $1"
+      loge "Error: Unknown option $1"
       usage
       ;;
   esac
@@ -99,7 +138,7 @@ done
 
 # Check required arguments
 if [ -z "$action" ]; then
-  error "Error: action is required"
+  loge "Error: action is required"
   usage
 fi
 echo "Action: $action"
@@ -109,18 +148,18 @@ if [ -n "$file" ]; then
   echo "File: $file"
 fi
 
-if [ "$verbose" == true ]; then
+if [ "$VERBOSE" == true ]; then
   echo "Verbose mode enabled"
 fi
 
 # Example of usage ask_yes_no
 ask_yes_no
 if [ $? == 1 ]; then
-    log_error "Aborting!"
+    loge "Aborting!"
 else
-    log_debug "Doing something" 
+    logd "Doing something" 
     sleep 2
-    log_success "Successfully finished"
+    logs "Successfully finished"
 fi
 
 exit 0

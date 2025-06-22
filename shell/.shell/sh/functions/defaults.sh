@@ -1,4 +1,9 @@
 
+reload() {
+    shell="$(ps -p $$ -o args= | awk '{print $1}')"
+    exec ${shell} -l
+}
+
 # Create a new directory and enter it
 mkd() {
 	mkdir -p "$@" && cd "$_";

@@ -12,6 +12,9 @@ log() {
 initialize() {
     local base_dir=$1
     local -a dirs=("${@:2}")
+    local script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+    echo script_dir=$script_dir
+
     log "Creating devault structure in: $base_dir"
     # Create main structure
     for dir in "${dirs[@]}"; do
@@ -19,8 +22,8 @@ initialize() {
         log "Created $dir"
     done
     log "Copying template files"
-    cp -v "./Makefile" "${base_dir}/Makefile"
-    cp -vr "./templates" "${base_dir}"
+    ln -sf "${script_dir}/Makefile" "${base_dir}/Makefile"
+    ln -sfn "${script_dir}/templates" "${base_dir}/templates"
     log "Vault is initialized."
 }
 

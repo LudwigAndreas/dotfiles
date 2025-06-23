@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # Base directory (default to ~/devault if not provided)
-BASE_DIR="${1:-$HOME/devault}"
+BASE_DIR="${1:-$HOME/vault}"
 
-echo "[INFO] Creating devault structure in: $BASE_DIR"
+echo "Creating devault structure in: $BASE_DIR"
 
 # Define directory structure
 declare -a DIRS=(
@@ -17,7 +17,7 @@ declare -a DIRS=(
 # Create main structure
 for dir in "${DIRS[@]}"; do
     mkdir -p "$dir"
-    echo "[CREATED] $dir"
+    echo "Created $dir"
 done
 
-echo "[DONE] devault is initialized."
+echo "Vault is initialized."

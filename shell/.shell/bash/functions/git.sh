@@ -6,52 +6,79 @@
 #   - opens current repository url
 #######################################
 repo() {
-    # Figure out github repo base URL
-    local base_url
-    base_url=$(git config --get remote.origin.url)
-    base_url=${base_url%\.git} # remove .git from end of string
-
-    # Fix git@github.com: URLs
-    base_url=${base_url//git@github\.com:/https:\/\/github\.com\/}
-
-    # Fix git://github.com URLS
-    base_url=${base_url//git:\/\/github\.com/https:\/\/github\.com\/}
-
-    # Fix git@bitbucket.org: URLs
-    base_url=${base_url//git@bitbucket.org:/https:\/\/bitbucket\.org\/}
-
-    # Fix git@gitlab.com: URLs
-    base_url=${base_url//git@gitlab\.com:/https:\/\/gitlab\.com\/}
-
-    # Validate that this folder is a git folder
-    if ! git branch 2>/dev/null 1>&2 ; then
+    # Validate we are inside a git repo
+    if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
         echo "Not a git repo!"
-        exit $?
+        return 1
     fi
 
-    # Find current directory relative to .git parent
-    full_path=$(pwd)
-    git_base_path=$(cd "./$(git rev-parse --show-cdup)" || exit 1; pwd)
-    relative_path=${full_path#$git_base_path} # remove leading git_base_path from working directory
+    # Read git remote URL
+    remote="$(git remote get-url origin)"
 
-    # If filename argument is present, append it
-    if [ "$1" ]; then
-        relative_path="$relative_path/$1"
+    # Optional manual override
+    hosting="$(git config --get remote.origin.git-hosting-type)"
+
+    # Parse URL
+    proto=""
+    host=""
+    port=""
+    path=""
+    if echo "$remote" | grep -q '^[^:]*://'; then
+        # URL form: protocol://host[:port]/path
+        proto="$(echo "$remote" | sed -E 's#^([^:]+)://.*#\1#')"
+        host="$(echo "$remote" | sed -E 's#^[^:]+://([^/:]+).*#\1#')"
+        port="$(echo "$remote" | sed -nE 's#^[^:]+://[^/:]+:([0-9]+).*#\1#p')"
+        path="/$(echo "$remote" | sed -E 's#^[^:]+://[^/]+/?##')"
+    else
+        # SCP form: git@host:path
+        proto="ssh"
+        host="$(echo "$remote" | sed -E 's#.+@([^:/]+).*#\1#')"
+        path="/$(echo "$remote" | sed -E 's#.+:[/]*##')"
     fi
 
-    # Figure out current git branch
-    # git_where=$(command git symbolic-ref -q HEAD || command git name-rev --name-only --no-undefined --always HEAD) 2>/dev/null
-    git_where=$(command git name-rev --name-only --no-undefined --always HEAD) 2>/dev/null
+    path="$(echo "$path" | sed 's#\.git$##')" # strip .git
+    base_url="https://$host"
 
-    # Remove cruft from branchname
-    branch=${git_where#refs\/heads\/}
-    branch=${branch#remotes\/origin\/}
+    # Detect default host type
+    if [ -z "$hosting" ]; then
+        if echo "$host" | grep -qi 'github'; then
+            hosting="github"
+        elif echo "$host" | grep -qi 'gitlab'; then
+            hosting="gitlab"
+        elif echo "$host" | grep -qi 'bitbucket'; then
+            hosting="bitbucket-server"
+        else
+            hosting="unknown"
+        fi
+    fi
 
-    [[ $base_url == *bitbucket* ]] && tree="src" || tree="tree"
-    url="$base_url/$tree/$branch$relative_path"
+    branch="$(git rev-parse --abbrev-ref HEAD)"
 
+    url=""
+    if [ "$hosting" = "github" ] || [ "$hosting" = "gitlab" ]; then
+        url="${base_url}${path}/tree/${branch}"
+    elif [ "$hosting" = "bitbucket-server" ]; then
+        # Extract projectKey + repo
+        if echo "$path" | grep -qE '^/[^/]+/[^/]+$'; then
+            project="$(echo "$path" | cut -d/ -f2)"
+            repo="$(echo "$path" | cut -d/ -f3)"
+            url="${base_url}/projects/${project}/repos/${repo}/browse?at=refs/heads/${branch}"
+        else
+            echo "Cannot parse Bitbucket Server path: $path"
+            return 1
+        fi
+    else
+        echo "Unknown or unsupported hosting type."
+        echo "Set manually via: git config remote.origin.git-hosting-type github|gitlab|bitbucket-server"
+        echo "Remote URL: $remote"
+        return 1
+    fi
 
-    echo "Calling $(type open) for $url"
+    echo "Opening: $url"
+    command -v open >/dev/null && open "$url" && return 0
+    command -v xdg-open >/dev/null && xdg-open "$url" && return 0
 
-    open "$url" &> /dev/null || (echo "Using $(type open) to open URL failed." && exit 1);
+    echo "Please open manually: $url"
+    return 0
 }
+

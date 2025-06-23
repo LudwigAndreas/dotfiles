@@ -76,7 +76,7 @@ repo() {
         fi
     elif [ "$hosting" = "bitbucket-server" ]; then
         # Extract projectKey + repo
-        project="$(echo "$path" | cut -d/ -f2 | tr '[:tolower:]' '[:toupper:]')"
+        project="$(echo "$path" | cut -d/ -f2 | tr '[:lower:]' '[:upper:]')"
         repo="$(echo "$path" | cut -d/ -f3)"
         url="${base_url}/projects/${project}/repos/${repo}/browse"
         if [ -n "$rel_url_path" ]; then
@@ -99,10 +99,16 @@ repo() {
     return 0
 }
 
-# URL-encode branch name for query param
+#######################################
+# POSIX-safe URL encode
+# Arguments:
+#   - String to encode
+# Outputs:
+#   - writes encoded string into stdout
+# Usage:
+#     urlencode "string"
+#######################################
 urlencode() {
-    # POSIX-safe URL encode
-    # Usage: urlencode "string"
     old_lc_collate=$LC_COLLATE
     LC_COLLATE=C
     s="$1"

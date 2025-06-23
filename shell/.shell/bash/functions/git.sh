@@ -1,3 +1,4 @@
+
 #######################################
 # Open current repo in browser
 # Arguments:
@@ -12,22 +13,31 @@ repo() {
         return 1
     fi
 
-    # Read git remote URL
     remote="$(git remote get-url origin)"
+    branch="$(git rev-parse --abbrev-ref HEAD)"
+    full_path="$(pwd)"
+    git_root="$(git rev-parse --show-toplevel)"
+    rel_path="${full_path#$git_root}"
+    rel_path="$(echo "$rel_path" | sed 's#^/##')"  # remove leading /
 
     # Optional manual override
     hosting="$(git config --get remote.origin.git-hosting-type)"
 
-    # Parse URL
+    # Parse remote URL
     proto=""
     host=""
-    port=""
     path=""
-    if echo "$remote" | grep -q '^[^:]*://'; then
+    if echo "$remote" | grep -q '^ssh://'; then
+        # SSH URL form: ssh://git@host:port/project/repo.git
+        clean_url="${remote#ssh://}"
+        clean_url="${clean_url#git@}"
+        host_port="${clean_url%%/*}"      # host:port
+        path="/${clean_url#*/}"           # /project/repo.git
+        host="${host_port%%:*}"           # host only
+    elif echo "$remote" | grep -q '^[^:]*://'; then
         # URL form: protocol://host[:port]/path
         proto="$(echo "$remote" | sed -E 's#^([^:]+)://.*#\1#')"
         host="$(echo "$remote" | sed -E 's#^[^:]+://([^/:]+).*#\1#')"
-        port="$(echo "$remote" | sed -nE 's#^[^:]+://[^/:]+:([0-9]+).*#\1#p')"
         path="/$(echo "$remote" | sed -E 's#^[^:]+://[^/]+/?##')"
     else
         # SCP form: git@host:path
@@ -52,21 +62,28 @@ repo() {
         fi
     fi
 
-    branch="$(git rev-parse --abbrev-ref HEAD)"
+    # URL-encode rel_path
+    rel_url_path=""
+    if [ -n "$rel_path" ]; then
+        rel_url_path="$(printf "%s" "$rel_path" | sed -E 's/([^a-zA-Z0-9._~-])/\1/g' | xargs -0 printf "%s")"
+    fi
 
     url=""
     if [ "$hosting" = "github" ] || [ "$hosting" = "gitlab" ]; then
         url="${base_url}${path}/tree/${branch}"
+        if [ -n "$rel_url_path" ]; then
+            url="${url}/${rel_url_path}"
+        fi
     elif [ "$hosting" = "bitbucket-server" ]; then
         # Extract projectKey + repo
-        if echo "$path" | grep -qE '^/[^/]+/[^/]+$'; then
-            project="$(echo "$path" | cut -d/ -f2)"
-            repo="$(echo "$path" | cut -d/ -f3)"
-            url="${base_url}/projects/${project}/repos/${repo}/browse?at=refs/heads/${branch}"
-        else
-            echo "Cannot parse Bitbucket Server path: $path"
-            return 1
+        project="$(echo "$path" | cut -d/ -f2 | tr '[:tolower:]' '[:toupper:]')"
+        repo="$(echo "$path" | cut -d/ -f3)"
+        url="${base_url}/projects/${project}/repos/${repo}/browse"
+        if [ -n "$rel_url_path" ]; then
+            url="${url}/${rel_url_path}"
         fi
+        encoded_branch="$(urlencode "refs/heads/${branch}")"
+        url="${url}?at=${encoded_branch}"
     else
         echo "Unknown or unsupported hosting type."
         echo "Set manually via: git config remote.origin.git-hosting-type github|gitlab|bitbucket-server"
@@ -80,5 +97,25 @@ repo() {
 
     echo "Please open manually: $url"
     return 0
+}
+
+# URL-encode branch name for query param
+urlencode() {
+    # POSIX-safe URL encode
+    # Usage: urlencode "string"
+    old_lc_collate=$LC_COLLATE
+    LC_COLLATE=C
+    s="$1"
+    out=""
+    while [ -n "$s" ]; do
+        c=${s%${s#?}}
+        case "$c" in
+            [a-zA-Z0-9.~_-]) out="${out}${c}" ;;
+            *) out="${out}$(printf '%%%02X' "'$c")" ;;
+        esac
+        s=${s#?}
+    done
+    LC_COLLATE=$old_lc_collate
+    printf "%s" "$out"
 }
 

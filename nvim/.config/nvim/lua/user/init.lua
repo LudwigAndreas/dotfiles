@@ -1,6 +1,3 @@
- -- require('user.opts')
-print('loading user')
 require('user.opts')
 require('user.keymaps')
 require('user.lazy')
-print('loaded user')

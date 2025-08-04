@@ -175,3 +175,22 @@ afk() {
     done
 }
 
+#######################################
+# fast scp. Sends $1 to first defined host in ~/.ssh/config:$2
+# Arguments:
+#   path on local
+#   path on remote
+# Outputs:
+#   see @scp
+#######################################
+fscp() {
+    local first_host
+    first_host=$(awk '/^Host / && !/[*?]/ { print $2; exit }' ~/.ssh/config)
+
+    if [ -z "$first_host" ]; then
+        echo "No valid Host found in ~/.ssh/config"
+        return 1
+    fi
+
+    scp -r "$1" "${first_host}:$2"
+}

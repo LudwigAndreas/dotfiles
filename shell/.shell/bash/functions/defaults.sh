@@ -145,3 +145,8 @@ targz() {
 
     echo "${tmpFile}.gz ($((zippedSize / 1000)) kB) created successfully.";
 }
+
+
+yub() {
+  open "http://yubnub.org/parser/parse?command=$*"
+}

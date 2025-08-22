@@ -89,12 +89,15 @@ dotfiles
 
 ## Resources
 
+### Download
 - [Download Jetbrains nerd font](https://www.nerdfonts.com/font-downloads)
+
+### References
 - [ThePrimagen Dotfiles](https://github.com/ThePrimeagen/.dotfiles)
 - [Nvim kickstart](https://github.com/nvim-lua/kickstart.nvim)
 - [Куда войти Dotfiles](https://github.com/IlyasYOY/dotfiles)
 - [Raycast scripts](https://github.com/raycast/script-commands/tree/master/commands#browsing)
 
-## Useful tools
+## Tools
 
-- (SDK Installer)[https://sdkman.io/]
+- [SDK Installer](https://sdkman.io/)

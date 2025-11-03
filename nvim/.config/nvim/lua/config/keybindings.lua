@@ -1,5 +1,10 @@
 local map = vim.keymap.set
 
+-- Rempping for clipboard
+map("v", "<C-c>", '"+y')
+map("n", "<C-p>", '"+p')
+map("i", "<C-p>", '<C-r>+')
+
 -- Remapping for defaults
 map("n", "J", "mzJ`z",
     { desc = "Join line without moving cursor" }

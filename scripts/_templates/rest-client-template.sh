@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
-set -o errexit
-set -o pipefail
-set -o nounset
+# set -o errexit
+# set -o pipefail
+# set -o nounset
 
 
-readonly API_BASE_URL=""
+readonly API_BASE_URL="https://rickandmortyapi.com/api"
 
 
 __dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -19,8 +19,7 @@ if command -v tput &>/dev/null && [ -t 1 ] && [ -z "${NO_COLOR:-}" ]; then
     BLUE="$(tput setaf 4)"
     MAGNETA="$(tput setaf 5)"
     CYAN="$(tput setaf 6)"
-    WHITE="$(tput sgr0)"
-    RESET="$(tput init)"
+    RESET="$(tput sgr0)"
 else
     RED=""
     GREEN=""
@@ -28,12 +27,11 @@ else
     BLUE=""
     MAGNETA=""
     CYAN=""
-    WHITE=""
     RESET=""
 fi
 
 logi() {
-    printf "%s[*] $1%s\n" "${WHITE}" "${RESET}"
+    printf "%s[*] $1%s\n" "${RESET}" "${RESET}"
 }
 
 loge() {
@@ -50,7 +48,7 @@ logd() {
 
 # Tempate printing usage
 usage() {
-    printf %s "${WHITE}"
+    printf %s "${RESET}"
     echo "Usage:	$0 [Options]"
     echo
     echo "Options:"
@@ -64,52 +62,93 @@ usage() {
 
 
 authenticate() {
-    if [[ $# -lt 1 ]]; then
-        loge "Error: missing endpoint argument"
+    local data
+    data=$1
+
+    logd "Authenticating using auth data file: ${data}"
+
+    local response
+
+    response=$(curl -s -X POST "${API_BASE_URL}/auth/login" \
+        -H "Content-Type: application/json" \
+        -d @"${data}")
+
+    if [[ -z "${response}" ]]; then
+        loge "Authentication failed. Response:"
+        loge "${response}"
+        exit 2
+    fi
+
+    echo ${response}
 }
 
 call_api() {
+    local endpoint="$1"
+    local method="${2:-GET}"
+    local data="${3:-}"
+    local token
 
+    token="$(authenticate ${AUTH})"
+
+    local url="${API_BASE_URL}/${endpoint}"
+
+    logd "fetching ${endpoint}"
+
+    if [[ -n "${data}" ]]; then
+        curl -s -X "${method}" "${url}" \
+            -H "Authorization: Bearer: ${token}" \
+            -H "Content-Type: application/json" \
+            -d "${data}"
+    else
+        curl -s -X "${method}" "${url}" \
+            -H "Authorization: Bearer ${token}"
+    fi
 }
 
+get_character() {
+    call_api $1 
+}
+
+main() {
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            -h|--help)
+                usage
+                ;;
+            -v|--verbose)
+                VERBOSE=true
+                shift
+                ;;
+            -a|--auth)
+                AUTH="$2"
+                shift 2
+                ;;
+            -path|--path)
+                path="$2"
+                shift 2
+                ;;
+            *)
+                loge "Error: Unknown option $1"
+                usage
+                ;;
+        esac
+    done
 
 
-arg1="${1:-}"
+    # Check required arguments
+    if [ -z "$AUTH" ]; then
+        loge "Error: auth file is required"
+        usage
+    fi
 
-while [[ $# -gt 0 ]]; do
-  case "$1" in
-    -h|--help)
-      usage
-      ;;
-    -v|--verbose)
-      VERBOSE=true
-      shift
-      ;;
-    -p|--path)
-      path="$2"
-      shift 2
-      ;;
-    -a|--auth)
-      file="$2"
-      shift 2
-      ;;
-    *)
-      loge "Error: Unknown option $1"
-      usage
-      ;;
-  esac
-done
+    if [ -z "$path" ]; then
+        loge "Error: path file is required"
+        usage
+    fi
 
+    get_character "$path"
 
-# Check required arguments
-if [ -z "$auth" ]; then
-  loge "Error: auth file is required"
-  usage
-fi
+    exit 0
+}
 
-if [ -z "$path" ]; then
-  loge "Error: path file is required"
-  usage
-fi
-
-exit 0
+main "$@"

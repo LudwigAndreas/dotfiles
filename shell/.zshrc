@@ -1,16 +1,32 @@
-
 autoload -Uz compinit && compinit
 
-source $HOME/.shell/sh/index.sh
-source $HOME/.shell/bash/index-reduced.sh
-source $HOME/.shell/zsh/index.sh
+export ZSH=$HOME/.oh-my-zsh
 
-fpath+=~/.oh-my-zsh/custom/completions
-autoload -U compinit && compinit
+plugins=(
+    git
+    zsh-syntax-highlighting
+)
+
+source $ZSH/oh-my-zsh.sh
+source ~/.zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh
+
+eval "$(starship init zsh)"
+eval "$(zoxide init --cmd cd zsh)"
+
+source "$HOME/.shell/config/exports.sh"
+source "$HOME/.shell/config/aliases.sh"
+source "$HOME/.shell/config/cmd-aliases.sh"
+source "$HOME/.shell/config/functions.sh"
 
 _p_completion() {
     local projects_dir="$HOME/vault/projects"
-    compadd -- $(find "$projects_dir" -mindepth 1 -maxdepth 1 -type d -exec basename {} \; 2>/dev/null)
+    compadd -- $(find -L "$projects_dir" -mindepth 1 -maxdepth 1 -type d -exec basename {} \; 2>/dev/null)
+}
+
+_snippet_completion() {
+    local snippets_dir="$XDG_CONFIG_HOME/snippets"
+    compadd -- $(find -L "$snippets_dir" -mindepth 1 -maxdepth 1 -type f -exec basename {} \; 2>/dev/null)
 }
 
 compdef _p_completion p
+compdef _snippet_completion snippet

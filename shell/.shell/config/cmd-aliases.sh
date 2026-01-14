@@ -11,6 +11,8 @@ fi
 
 alias o="open"
 
+alias dopen='/usr/bin/open ~/Downloads/$(ls -t ~/Downloads/ | head -n 1)'
+
 
 # OS specific aliases
 if [[ "$(uname)" == 'Darwin' ]]; then

@@ -1,3 +1,5 @@
+# Kiro CLI pre block. Keep at the top of this file.
+[[ -f "${HOME}/Library/Application Support/kiro-cli/shell/bashrc.pre.bash" ]] && builtin source "${HOME}/Library/Application Support/kiro-cli/shell/bashrc.pre.bash"
 # Only run if interactive shell
 [[ $- != *i* ]] && return
 
@@ -45,3 +47,6 @@ source "$HOME/.shell/config/exports.sh"
 source "$HOME/.shell/config/aliases.sh"
 source "$HOME/.shell/config/cmd-aliases.sh"
 source "$HOME/.shell/config/functions.sh"
+
+# Kiro CLI post block. Keep at the bottom of this file.
+[[ -f "${HOME}/Library/Application Support/kiro-cli/shell/bashrc.post.bash" ]] && builtin source "${HOME}/Library/Application Support/kiro-cli/shell/bashrc.post.bash"

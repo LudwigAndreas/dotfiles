@@ -11,5 +11,9 @@ window-decoration = true
 keybind = global:cmd+/=toggle_quick_terminal
 macos-option-as-alt = true
 # background-opacity = 0.7
-# background-blur-radius = 20 
+# background-blur-radius = 20
 command=~/.config/ghostty/start-session.sh
+
+keybind = ctrl+tab=text:\x1b[9;5u
+keybind = ctrl+shift+tab=text:\x1b[9;6u
+

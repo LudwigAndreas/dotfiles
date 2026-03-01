@@ -29,8 +29,8 @@ map("n", "N", "Nzzzv", bufopts, "Go to next search match and unfold if needed")
 map("v", "J", ":m '>+1<CR>gv=gv", bufopts, "Move selection down")
 map("v", "K", ":m '<-2<CR>gv=gv", bufopts, "Move selection up")
 
-map("n", "<Tab>", "ma=ap'a", bufopts, "Indent current paragraph")
-map("v", "<Tab>", "=gv", bufopts, "Indent selection")
+-- map("n", "<Tab>", "ma=ap'a", bufopts, "Indent current paragraph")
+-- map("v", "<Tab>", "=gv", bufopts, "Indent selection")
 
 map("n", "<leader>s", [[:%s/\<<C-r><C-w>\>//gI<Left><Left><Left>]], bufopts, "Replace current word")
 map("x", "<leader>s", [["sy:%s/<C-r>s//gI<Left><Left><Left>]], bufopts, "Replace selection")
@@ -44,3 +44,10 @@ map("n", "<C-S-Right>", "<cmd>:vertical resize -2<cr>", bufopts, "Resize window 
 map("n", "<C-S-Left>", "<cmd>:vertical resize +2<cr>", bufopts, "Resize window left")
 map("n", "<C-S-Down>", "<cmd>:resize -2<cr>", bufopts, "Resize window down")
 map("n", "<C-S-Up>", "<cmd>:resize +2<cr>", bufopts, "Resize window up")
+
+
+-- map("n", "<C-W>", ":wq<CR>", bufopts, { desc = "Close tab" })
+map("n", "<leader>x", ":bdelete<CR>", bufopts, { desc = "Close buffer" })
+map("n", "<leader>tn", ":tabnew<CR>", bufopts, { desc = "New tab" })
+map("n", "<leader>tc", ":tabclose<CR>", bufopts, { desc = "Close tab" })
+map("n", "<leader>tc", ":tabclose<CR>", bufopts, { desc = "Close tab" })

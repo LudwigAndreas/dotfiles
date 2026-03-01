@@ -1,9 +1,5 @@
 return {
 	{
-		"williamboman/mason.nvim", -- manson package manager
-		opts = {},
-	},
-	{
 		"WhoIsSethDaniel/mason-tool-installer.nvim", -- manson packages installer
 		opts = {
 			ensure_installed = {

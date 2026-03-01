@@ -1,6 +1,6 @@
 return {
 	{
-		"nvim-treesitter/nvim-treesitter",
+		"nvim-treesitter/nvim-treesitter", -- syntax highlight
 		config = function()
 			require("nvim-treesitter.configs").setup({
 				ensure_installed = {

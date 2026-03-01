@@ -11,7 +11,7 @@ return {
 		lazy = false,
 		keys = {
 			--      { "\\",         ":Neotree filesystem toggle<CR>", desc = "Toggle filetree" },
-			{ "<leader>gt", ":Neotree git_status<CR>", desc = "[G]ind status [T]ree" },
+			{ "<leader>gg", ":Neotree git_status<CR>", desc = "[G]ind status [T]ree" },
 			{ "<leader>f.", ":Neotree reveal<CR>", desc = "[F]ind current file in filetree" },
 		},
 		config = function()

@@ -1,6 +1,7 @@
 return {
   {
     "nvim-neo-tree/neo-tree.nvim",
+    enabled = true,
     branch = "v3.x",
     dependencies = {
       "nvim-lua/plenary.nvim",
@@ -15,10 +16,19 @@ return {
     },
     config = function()
       require('neo-tree').setup({
+        window = {
+          position = "left",
+          width = 30,
+        },
         source_selector = {
           winbar = true,
           statusline = false,
-        }
+        },
+        filesystem = {
+          follow_current_file = {
+            enabled = true,
+          },
+        },
       })
 
       vim.keymap.set("n", "\\",

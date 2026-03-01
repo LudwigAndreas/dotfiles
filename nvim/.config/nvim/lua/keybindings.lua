@@ -8,14 +8,14 @@ local map = require("config.utils").map
 local bufopts = { silent = true, noremap = true }
 
 map("v", "<C-c>", '"+y', bufopts, "Yank into system clipboard")
-map({ "n", "v" }, "<leader>y", [["+y]],bufopts, "Yank into system clipboard")
+map({ "n", "v" }, "<leader>y", [["+y]], bufopts, "Yank into system clipboard")
 map("n", "<leader>Y", [["+Y]], bufopts, "Yank line into system clipboard")
 
 map("n", "<C-p>", '"+p', bufopts, "Paste from system clipboard")
-map("i", "<C-p>", '<C-r>+', bufopts, "Paste from system clipboard")
+map("i", "<C-p>", "<C-r>+", bufopts, "Paste from system clipboard")
 map("x", "<leader>p", [["_dP]], bufopts, "Paste witout replacing clipboard")
 
-map("n", "<Esc>", '<cmd>nohlsearch<CR>', bufopts, "Disable highlight on Esc")
+map("n", "<Esc>", "<cmd>nohlsearch<CR>", bufopts, "Disable highlight on Esc")
 
 -- Remapping for defaults
 map("n", "J", "mzJ`z", bufopts, "Join line without moving cursor")
@@ -24,7 +24,7 @@ map("n", "<C-d>", "<C-d>zz", bufopts, "Move half screed down with centered curso
 map("n", "<C-u>", "<C-u>zz", bufopts, "Move half screed up with centered cursor")
 
 map("n", "n", "nzzzv", bufopts, "Go to next search match and unfold if needed")
-map("n", "N", "Nzzzv",bufopts, "Go to next search match and unfold if needed")
+map("n", "N", "Nzzzv", bufopts, "Go to next search match and unfold if needed")
 
 map("v", "J", ":m '>+1<CR>gv=gv", bufopts, "Move selection down")
 map("v", "K", ":m '<-2<CR>gv=gv", bufopts, "Move selection up")

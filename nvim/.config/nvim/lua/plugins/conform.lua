@@ -13,20 +13,25 @@ return {
 			},
 		},
 	},
-	"stevearc/conform.nvim", -- run style-formatter
-	events = {
-		"BufReadPre",
-		"BufNewFile",
+	{
+		"stevearc/conform.nvim", -- run style-formatter
+		events = {
+			"BufReadPre",
+			"BufNewFile",
+		},
+		config = function()
+			require("conform").setup({
+				formatters_by_ft = {
+					json = { "prettierd", "prettier", "fixjson", stop_after_first = true },
+					xml = { "xmlformatter" },
+					yaml = { "prettier" },
+					lua = { "stylua" },
+					javascript = { "prettier" },
+				},
+			})
+			vim.keymap.set("n", "<leader>oi", function()
+				require("conform").format({ async = true, lsp_fallback = true })
+			end, { desc = "Format buffer" })
+		end,
 	},
-	config = function()
-		require("conform").setup({
-			formetters_by_ft = {
-				json = { "prettierd", "prettier", "fixjson", stop_after_first = true },
-				xml = { "xmlformatter" },
-				yaml = { "prettier" },
-				lua = { "stylua" },
-				javascript = { "prettier" },
-			},
-		})
-	end,
 }

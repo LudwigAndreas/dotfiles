@@ -46,8 +46,8 @@ map("n", "<C-S-Down>", "<cmd>:resize -2<cr>", bufopts, "Resize window down")
 map("n", "<C-S-Up>", "<cmd>:resize +2<cr>", bufopts, "Resize window up")
 
 
--- map("n", "<C-W>", ":wq<CR>", bufopts, { desc = "Close tab" })
-map("n", "<leader>x", ":bdelete<CR>", bufopts, { desc = "Close buffer" })
-map("n", "<leader>tn", ":tabnew<CR>", bufopts, { desc = "New tab" })
-map("n", "<leader>tc", ":tabclose<CR>", bufopts, { desc = "Close tab" })
-map("n", "<leader>tc", ":tabclose<CR>", bufopts, { desc = "Close tab" })
+-- map("n", "<C-W>", ":wq<CR>", bufopts, "Close tab")
+map("n", "<leader>x", ":bdelete<CR>", bufopts, "Close buffer")
+map("n", "<leader>tn", ":tabnew<CR>", bufopts, "New tab")
+map("n", "<leader>tc", ":tabclose<CR>", bufopts, "Close tab" )
+map("n", "<leader>tc", ":tabclose<CR>", bufopts, "Close tab" )

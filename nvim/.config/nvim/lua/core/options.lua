@@ -134,3 +134,5 @@ vim.opt.clipboard:append("unnamedplus")
 vim.opt.spell = true
 -- vim.opt.spelllang = { 'en', 'ru' }
 vim.opt.spelllang = { "en" }
+
+vim.opt.conceallevel = 2

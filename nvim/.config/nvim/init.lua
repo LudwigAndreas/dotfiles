@@ -21,3 +21,6 @@ require("lazy").setup({ import = "plugins" }, {
 -- require('core')
 -- require('lsp')
 require("keybindings")
+
+
+require('langmapper').automapping({ global = true, buffer = true })

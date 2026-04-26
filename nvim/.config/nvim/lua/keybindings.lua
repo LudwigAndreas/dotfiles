@@ -45,9 +45,26 @@ map("n", "<C-S-Left>", "<cmd>:vertical resize +2<cr>", bufopts, "Resize window l
 map("n", "<C-S-Down>", "<cmd>:resize -2<cr>", bufopts, "Resize window down")
 map("n", "<C-S-Up>", "<cmd>:resize +2<cr>", bufopts, "Resize window up")
 
-
 -- map("n", "<C-W>", ":wq<CR>", bufopts, "Close tab")
 map("n", "<leader>x", ":bdelete<CR>", bufopts, "Close buffer")
 map("n", "<leader>tn", ":tabnew<CR>", bufopts, "New tab")
-map("n", "<leader>tc", ":tabclose<CR>", bufopts, "Close tab" )
-map("n", "<leader>tc", ":tabclose<CR>", bufopts, "Close tab" )
+map("n", "<leader>tc", ":tabclose<CR>", bufopts, "Close tab")
+map("n", "<leader>tc", ":tabclose<CR>", bufopts, "Close tab")
+
+-- Obsidian
+
+local obsidian_utils = require("utils.obsidian")
+
+map("n", "<leader>on", "<cmd>ObsidianNew<CR>", bufopts, "New Obsidian note")
+
+map("n", "<leader>ot", "<cmd>ObsidianToday<CR>", bufopts, "")
+
+map("n", "<leader>os", "<cmd>ObsidianSearch<CR>", bufopts, "Search notes")
+
+map("n", "<leader>op", function()
+	obsidian_utils.go_relative(-1)
+end, bufopts, "Previous daily note")
+
+map("n", "<leader>on", function()
+	obsidian_utils.go_relative(1)
+end, bufopts,"Next daily note")
